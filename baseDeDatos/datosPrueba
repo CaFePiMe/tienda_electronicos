@@ -1,0 +1,37 @@
+-- Insertando datos en la tabla categoria
+INSERT INTO categoria (id_cat, nombre, descripcion) VALUES
+(1, 'Computadoras', 'Computadoras de escritorio y portátiles'),
+(2, 'Dispositivos móviles', 'Teléfonos inteligentes y tablets'),
+(3, 'Electrodomésticos', 'Refrigeradores, lavadoras, estufas, etc.'),
+(4, 'Audio y Video', 'Televisores, bocinas, reproductores, etc.');
+
+-- Insertando datos en la tabla proveedor
+INSERT INTO proveedor (id_prv, nombre, nit) VALUES
+(1, 'Electrónica S.A.', 123456),
+(2, 'TechSuppliers Inc.', 789012),
+(3, 'GadgetsPlus Corp.', 345678);
+
+-- Insertando datos en la tabla producto
+INSERT INTO producto (id_pro, id_prv, id_cat, nombre, descripcion, precio, stock, imagine) VALUES
+(1, 1, 1, 'Laptop XYZ', 'Portátil de alto rendimiento', 999.99, 50, 'laptop.jpg'),
+(2, 2, 2, 'Smartphone ABC', 'Teléfono inteligente de gama alta', 699.99, 75, 'smartphone.jpg'),
+(3, 3, 3, 'Refrigerador DEF', 'Refrigerador de doble puerta', 1499.99, 20, 'refrigerador.jpg'),
+(4, 1, 4, 'TV LED GHI', 'Televisor LED de 55 pulgadas', 899.99, 30, 'tv.jpg');
+
+-- Insertando datos en la tabla usuario
+INSERT INTO usuario (id_usu, email, nombre, password, nit, admin) VALUES
+(1, 'admin@tienda.com', 'Administrador', 123456, 987654, true),
+(2, 'cliente1@email.com', 'Juan Pérez', 456789, 234567, false),
+(3, 'cliente2@email.com', 'María Rodríguez', 789012, 890123, false);
+
+-- Insertando datos en la tabla compra
+INSERT INTO compra (id_com, total, estado, fecha, id_usu) VALUES
+(1, 999.99, 'Procesada', '2024-05-10', 2),
+(2, 2399.98, 'Enviada', '2024-05-09', 3);
+
+-- Insertando datos en la tabla carro
+INSERT INTO carro (id_com, id_pro, cantidad, precioun) VALUES
+(1, 1, 1, 999.99),
+(2, 2, 1, 699.99),
+(2, 3, 1, 1499.99),
+(2, 4, 1, 899.99);
