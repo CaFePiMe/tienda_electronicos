@@ -23,7 +23,7 @@ public class Compra extends CBDAbstract {
 	
 	private void setBase() {
 		this.setNombreTabla("Compra");
-		this.setCampoClavePrimaria("idc");
+		this.setCampoClavePrimaria("id_com");
 		this.setCampoExistencial("activo");
 	}
 	

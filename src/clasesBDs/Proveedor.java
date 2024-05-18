@@ -17,7 +17,7 @@ public class Proveedor extends CBDAbstract {
 	
 	public void setBase() {
 		this.setNombreTabla("proveedor");
-		this.setCampoClavePrimaria("idp");
+		this.setCampoClavePrimaria("id_prv");
 		this.setCampoExistencial("activo");
 	}
 	
