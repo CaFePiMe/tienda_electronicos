@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import adminBD.ConexionBD;
 import clasesBDs.CBDAbstract;
 
 public abstract class CCAbstract<M extends CBDAbstract> implements CCInterface {
@@ -26,8 +27,8 @@ public abstract class CCAbstract<M extends CBDAbstract> implements CCInterface {
 				+ mdl.getCampoClavePrimaria() + " = " + mdl.getPrimaryKey() + "";
 		int opcion = 0;
 		try {
-			opcion = BaseConexion.getStatement().executeUpdate(sql);
-			BaseConexion.cerrarEnlacesConexion(BaseConexion.SOLO_STATEMENT);
+			opcion = ConexionBD.getStatement().executeUpdate(sql);
+			ConexionBD.cerrarEnlacesConexion(ConexionBD.SOLO_STATEMENT);
 		} catch (SQLException ex) {
 			Logger.getLogger(CCAbstract.class.getName()).log(Level.SEVERE, null, ex);
 		}
