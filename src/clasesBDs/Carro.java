@@ -17,7 +17,7 @@ public class Carro extends CBDAbstract {
 	
 	private void setBase() {
 		this.setNombreTabla("carro");
-		this.setCampoClavePrimaria("idc");
+		this.setCampoClavePrimaria("id_car");
 		this.setCampoExistencial("activo");
 	}
 	

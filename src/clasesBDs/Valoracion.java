@@ -17,7 +17,7 @@ public class Valoracion extends CBDAbstract {
 	
 	public void setBase() {
 		this.setNombreTabla("valoracion");
-		this.setCampoClavePrimaria("idv");
+		this.setCampoClavePrimaria("id_val");
 		this.setCampoExistencial("activo");
 	}
 	

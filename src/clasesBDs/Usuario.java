@@ -24,7 +24,7 @@ public class Usuario extends CBDAbstract {
 	
 	private void setBase() {
 		this.setNombreTabla("usuario");
-		this.setCampoClavePrimaria("idu");
+		this.setCampoClavePrimaria("id_usu");
 		this.setCampoExistencial("activo");
 	}
 	
