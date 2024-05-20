@@ -8,6 +8,7 @@ public class Usuario extends CBDAbstract {
 	private int nit;
 	private boolean admin;
 	
+	
 	public Usuario() {
 		setBase();
 	}
@@ -19,7 +20,6 @@ public class Usuario extends CBDAbstract {
 		this.password = password;
 		this.nit = nit;
 		this.admin = admin;
-		
 	}
 	
 	private void setBase() {

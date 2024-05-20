@@ -2,6 +2,8 @@ package clasesBDs;
 
 public class Carro extends CBDAbstract {
 	
+	private int idcom;
+	private int idpro;
 	private int cantidad;
 	private double precio;
 	
@@ -19,6 +21,22 @@ public class Carro extends CBDAbstract {
 		this.setNombreTabla("carro");
 		this.setCampoClavePrimaria("id_car");
 		this.setCampoExistencial("activo");
+	}
+	
+	public int getIDcom() {
+		return idcom;
+	}
+	
+	public void setIDcom(int idcom) {
+		this.idcom = idcom;
+	}
+	
+	public int getIDpro() {
+		return idpro;
+	}
+	
+	public void setIDpro(int idpro) {
+		this.idpro = idpro;
 	}
 	
 	public int getCantidad() {
