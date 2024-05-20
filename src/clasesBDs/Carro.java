@@ -11,8 +11,10 @@ public class Carro extends CBDAbstract {
 		setBase();
 	}
 	
-	public Carro (int cantidad, double precio) {
+	public Carro (int idcom, int idpro, int cantidad, double precio) {
 		setBase();
+		this.idcom = idcom;
+		this.idpro = idpro;
 		this.cantidad = cantidad;
 		this.precio = precio;
 	}

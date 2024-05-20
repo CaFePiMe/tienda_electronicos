@@ -13,7 +13,6 @@ public abstract class CBDAbstract {
 	private String nombreTabla;
 	private String campoClavePrimaria;
 	private String activo;
-
 	public String getCampoClavePrimaria() {
 		return campoClavePrimaria;
 	}
@@ -53,5 +52,4 @@ public abstract class CBDAbstract {
 	public void setActivos(String activo) {
 		this.activo = activo;
 	}
-	
 }

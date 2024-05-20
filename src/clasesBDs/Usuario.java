@@ -8,7 +8,6 @@ public class Usuario extends CBDAbstract {
 	private int nit;
 	private boolean admin;
 	
-	
 	public Usuario() {
 		setBase();
 	}
