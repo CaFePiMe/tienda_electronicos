@@ -11,14 +11,14 @@ public abstract class CBDAbstract {
 	protected Integer primaryKey;
 	private String campoExistencial;
 	private String nombreTabla;
-	private String CampoClavePrimaria;
-
+	private String campoClavePrimaria;
+	private String activo;
 	public String getCampoClavePrimaria() {
-		return CampoClavePrimaria;
+		return campoClavePrimaria;
 	}
 
 	public void setCampoClavePrimaria(String CampoClavePrimaria) {
-		this.CampoClavePrimaria = CampoClavePrimaria;
+		this.campoClavePrimaria = CampoClavePrimaria;
 	}
 
 	public String getNombreTabla() {
@@ -45,4 +45,11 @@ public abstract class CBDAbstract {
 		this.campoExistencial = campoExistencial;
 	}
 	
+	public String getActivos() {
+		return activo;
+	}
+	
+	public void setActivos(String activo) {
+		this.activo = activo;
+	}
 }
