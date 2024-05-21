@@ -39,11 +39,14 @@ public class CCompra extends CCAbstract {
 	@Override
 	protected CBDAbstract llenar(ResultSet rs) {
 		try {
-			String nombre = rs.getString("nombre");
-			String descripcion = rs.getString("descripcion");
-            Categoria ca = new Categoria(nombre, descripcion);
+			int idusu = rs.getInt("id_usu");
+			Double total = rs.getDouble("total");
+			String estado = rs.getString("estado");
+			java.sql.Date fecha = rs.getDate("fecha");
+			String activo = rs.getString("activo");
+            Compra co = new Compra( idusu, total, estado, fecha);
         	
-            return ca;
+            return co;
 		} catch (SQLException e) {
 			e.printStackTrace();
 	    	return null;

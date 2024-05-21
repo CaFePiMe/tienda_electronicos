@@ -11,12 +11,13 @@ public class Compra extends CBDAbstract {
 		setBase();
 	}
 	
-	public Compra( double total, String estado, java.sql.Date fecha, int idu) {
+	public Compra(int idsuu, double total, String estado, java.sql.Date fecha) {
 		setBase();
 		this.primaryKey = primaryKey;
 		this.total = total;
 		this.estado = estado;
 		this.fecha = fecha;
+		this.idusu = idusu;
 		
 	}
 	
