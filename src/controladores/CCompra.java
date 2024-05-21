@@ -25,9 +25,11 @@ public class CCompra extends CCAbstract {
 	    try {
 	        ps = conexion.prepareCall(sql);
 	        ps.setInt(1, compra.getPrimaryKey());
-	        ps.setString(2, compra.getNombre());
-	        ps.setString(3, compra.getDescripcion());
-	        ps.setString(4, compra.getActivos());
+	        ps.setInt(2, compra.getIDusu());
+	        ps.setDouble(3, compra.getTotal());
+	        ps.setString(4, compra.getEstado());
+	        ps.setDate(5, compra.getFecha());
+	        ps.setString(6, compra.getActivos());
 	        ps.executeUpdate();
 	    } catch (SQLException e) {
 	    	e.printStackTrace();
@@ -36,9 +38,15 @@ public class CCompra extends CCAbstract {
 
 	@Override
 	protected CBDAbstract llenar(ResultSet rs) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			String nombre = rs.getString("nombre");
+			String descripcion = rs.getString("descripcion");
+            Categoria ca = new Categoria(nombre, descripcion);
+        	
+            return ca;
+		} catch (SQLException e) {
+			e.printStackTrace();
+	    	return null;
+		}
 	}
-
-
 }

@@ -1,19 +1,17 @@
 package clasesBDs;
 
-import java.util.Date;
-
 public class Compra extends CBDAbstract {
 	
 	private int idusu;
 	private double total;
 	private String estado;
-	private Date fecha;
+	private java.sql.Date fecha;
 	
 	public Compra() {
 		setBase();
 	}
 	
-	public Compra( double total, String estado, Date fecha, int idu) {
+	public Compra( double total, String estado, java.sql.Date fecha, int idu) {
 		setBase();
 		this.primaryKey = primaryKey;
 		this.total = total;
@@ -44,11 +42,11 @@ public class Compra extends CBDAbstract {
 		this.estado = estado;
 	}
 	
-	public Date getFecha() {
+	public java.sql.Date getFecha() {
 		return fecha;
 	}
 	
-	public void setFecha(Date fecha) {
+	public void setFecha(java.sql.Date fecha) {
 		this.fecha = fecha;
 	}
 	
