@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Compra extends CBDAbstract {
 	
+	private int idusu;
 	private double total;
 	private String estado;
 	private Date fecha;
@@ -30,6 +31,7 @@ public class Compra extends CBDAbstract {
 	public double getTotal() {
 		return total;
 	}
+	
 	public void setTotal(double total) {
 		this.total = total;
 	}
@@ -41,10 +43,20 @@ public class Compra extends CBDAbstract {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	
 	public Date getFecha() {
 		return fecha;
 	}
+	
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+	
+	public int getIDusu() {
+		return idusu;
+	}
+	
+	public void setIDusu(int idusu) {
+		this.idusu = idusu;
 	}
 }

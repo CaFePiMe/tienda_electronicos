@@ -1,7 +1,9 @@
 package controladores;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import adminBD.ConexionBD;
 import clasesBDs.Usuario;
 
@@ -10,10 +12,12 @@ public class CUsuario extends CCAbstract {
 	ConexionBD con = new ConexionBD();
 	Connection conexion = con.getConexion();
 	
-	public CUsuario() {}
+	public CUsuario() {
+		this.nombreTabla = "usuario";
+	}
 	
 	public void addUsuario(Usuario usuario) throws SQLException {
-		
+		this.
 	    sql = "INSERT INTO usuario (id_usu, email, nombre, password, nit, admin, activo)"
 	    		+ "VALUES (?, ?, ?, ?, ?, ?, ?);";
 	    try {
@@ -31,30 +35,20 @@ public class CUsuario extends CCAbstract {
 	    }
     }
 	
-	public Usuario getUsuario(int id) {
-		
+	@Override
+	public Usuario llenar(ResultSet r) {
 		try {
-			sql = "SELECT * FROM usuario WHERE id_usu = ?;";
-	        ps = conexion.prepareCall(sql);
-	        rs = ps.executeQuery();
-	        
-	        if (rs.getString("activo").equals("activo")) {
-	        	
-	            String email = rs.getString("email");
-	            String nombre = rs.getString("nombre");
-	            String password = rs.getString("password");
-	            int nit = rs.getInt("nit");
-	            boolean admin = rs.getBoolean("admin");
-	            Usuario us = new Usuario(email, nombre, password, nit, admin);
-	        	
-	            return us;
-	        } else {
-	        	return null;
-	        }
-	        
+			String email = r.getString("email");
+	        String nombre = r.getString("nombre");
+	        String password = r.getString("password");
+	        int nit = r.getInt("nit");
+	        boolean admin = r.getBoolean("admin");
+	        Usuario us = new Usuario(email, nombre, password, nit, admin);
+			return us;
+			
 		} catch (SQLException e) {
-	    	e.printStackTrace();
+			e.printStackTrace();
 	    	return null;
-	    }
+		}
 	}
-}
+} 
