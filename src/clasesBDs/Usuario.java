@@ -19,7 +19,6 @@ public class Usuario extends CBDAbstract {
 		this.password = password;
 		this.nit = nit;
 		this.admin = admin;
-		
 	}
 	
 	private void setBase() {
