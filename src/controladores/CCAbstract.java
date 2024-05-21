@@ -1,10 +1,6 @@
 package controladores;
 
-<<<<<<< HEAD
-import java.io.InputStream;
-=======
 import java.sql.Connection;
->>>>>>> 31bb8e64d69f5681e820530fe0bee3cf387db06a
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,11 +9,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-<<<<<<< HEAD
-import clasesBDs.CBDAbstract;
-
-public abstract class CCAbstract<M extends CBDAbstract> implements CCInterface {
-=======
 import adminBD.ConexionBD;
 import clasesBDs.CBDAbstract;
 
@@ -27,45 +18,18 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 
 	ConexionBD con = new ConexionBD();
 	Connection conexion = con.getConexion();
->>>>>>> 31bb8e64d69f5681e820530fe0bee3cf387db06a
 	
 	public ResultSet rs;
 	public PreparedStatement ps;
 	public Statement st;
 	public String sql;
-<<<<<<< HEAD
-	public int numRegistros = 0;
-	public int finalPag = 50;
-	public int inicioPag = 0;
-	
-	public int Registro(M mdl) {
-=======
 	public int numRegistros = 0; 
 	
 	public int borrarRegistro(M mdl) {
->>>>>>> 31bb8e64d69f5681e820530fe0bee3cf387db06a
 		sql = "UPDATE " + mdl.getNombreTabla() + " SET " + mdl.getCampoExistencial() + " = 0 WHERE "
 				+ mdl.getCampoClavePrimaria() + " = " + mdl.getPrimaryKey() + "";
 		int opcion = 0;
 		try {
-<<<<<<< HEAD
-			opcion = BaseConexion.getStatement().executeUpdate(sql);
-			BaseConexion.cerrarEnlacesConexion(BaseConexion.SOLO_STATEMENT);
-		} catch (SQLException ex) {
-			Logger.getLogger(CCAbstract.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		return opcion;
-	}
-	
-	public void setNumPaginador(int inicio, int fin) {
-		finalPag = fin;
-		inicioPag = inicio;
-	}
-	
-	public int getCantidadRegistros() {
-		return numRegistros;
-	}
-=======
 			opcion = ConexionBD.getStatement().executeUpdate(sql);
 			ConexionBD.cerrarEnlacesConexion(ConexionBD.SOLO_STATEMENT);
 		} catch (SQLException ex) {
@@ -123,5 +87,4 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 	
     protected abstract M llenar(ResultSet rs);
     
->>>>>>> 31bb8e64d69f5681e820530fe0bee3cf387db06a
 }
