@@ -35,6 +35,11 @@ public class CUsuario extends CCAbstract {
 	    }
     }
 	
+	public Usuario checkPassword(String entrada) {
+		
+		return null;
+	}
+	
 	@Override
 	public Usuario llenar(ResultSet r) {
 		try {
