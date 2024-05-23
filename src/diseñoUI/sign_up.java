@@ -1,0 +1,140 @@
+package diseñoUI;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+public class sign_up extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField var_usuario;
+	private JTextField var_correo;
+	private JTextField var_contraseña;
+	private JTextField var_ccontraseña;
+	private JTextField textField;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					sign_up frame = new sign_up();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public sign_up() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 767, 433);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\sign_up\\img\\img_icon.png"));
+		lblNewLabel.setBounds(90, 94, 155, 174);
+		contentPane.add(lblNewLabel);
+		
+		JButton btn_YatienesUnUsuario_1 = new JButton("");
+		btn_YatienesUnUsuario_1.setIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\sign_up\\btn\\btn_registrarse.png"));
+		btn_YatienesUnUsuario_1.setBounds(478, 334, 91, 23);
+		contentPane.add(btn_YatienesUnUsuario_1);
+		
+		JButton btn_YatienesUnUsuario = new JButton("Ya tienes un Usuario?");
+		btn_YatienesUnUsuario.setSelectedIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\log_in\\btn\\btn_noTienesUnUsuario.png"));
+		btn_YatienesUnUsuario.setBounds(302, 300, 144, 23);
+		contentPane.add(btn_YatienesUnUsuario);
+		
+		JLabel h3_nit = new JLabel("NIT");
+		h3_nit.setForeground(Color.WHITE);
+		h3_nit.setFont(new Font("Lufga SemiBold", Font.PLAIN, 11));
+		h3_nit.setBounds(301, 252, 129, 14);
+		contentPane.add(h3_nit);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(302, 267, 266, 20);
+		contentPane.add(textField);
+		
+		var_ccontraseña = new JTextField();
+		var_ccontraseña.setColumns(10);
+		var_ccontraseña.setBounds(303, 223, 266, 20);
+		contentPane.add(var_ccontraseña);
+		
+		JLabel h3_ccontr = new JLabel("Confirmar contraseña");
+		h3_ccontr.setForeground(Color.WHITE);
+		h3_ccontr.setFont(new Font("Lufga SemiBold", Font.PLAIN, 11));
+		h3_ccontr.setBounds(302, 208, 129, 14);
+		contentPane.add(h3_ccontr);
+		
+		var_contraseña = new JTextField();
+		var_contraseña.setColumns(10);
+		var_contraseña.setBounds(303, 177, 266, 20);
+		contentPane.add(var_contraseña);
+		
+		JLabel h3_contr = new JLabel("Contraseña");
+		h3_contr.setForeground(Color.WHITE);
+		h3_contr.setFont(new Font("Lufga SemiBold", Font.PLAIN, 11));
+		h3_contr.setBounds(302, 162, 64, 14);
+		contentPane.add(h3_contr);
+		
+		var_correo = new JTextField();
+		var_correo.setColumns(10);
+		var_correo.setBounds(303, 133, 266, 20);
+		contentPane.add(var_correo);
+		
+		JLabel h3_corr = new JLabel("Correo");
+		h3_corr.setForeground(Color.WHITE);
+		h3_corr.setFont(new Font("Lufga SemiBold", Font.PLAIN, 11));
+		h3_corr.setBounds(302, 118, 46, 14);
+		contentPane.add(h3_corr);
+		
+		var_usuario = new JTextField();
+		var_usuario.setBounds(303, 94, 266, 20);
+		contentPane.add(var_usuario);
+		var_usuario.setColumns(10);
+		
+		JLabel h3 = new JLabel("Usuario");
+		h3.setFont(new Font("Lufga SemiBold", Font.PLAIN, 11));
+		h3.setForeground(new Color(255, 255, 255));
+		h3.setBounds(302, 79, 46, 14);
+		contentPane.add(h3);
+		
+		JLabel h2 = new JLabel("Registrate completando los espacios porfavor");
+		h2.setFont(new Font("Lufga", Font.PLAIN, 15));
+		h2.setForeground(new Color(255, 255, 255));
+		h2.setBounds(302, 58, 340, 20);
+		contentPane.add(h2);
+		
+		JLabel h1 = new JLabel("¡Bienvenido!");
+		h1.setFont(new Font("Lufga Black", Font.PLAIN, 35));
+		h1.setForeground(new Color(255, 255, 255));
+		h1.setBounds(302, 23, 223, 33);
+		contentPane.add(h1);
+		
+		JLabel bg_ = new JLabel("");
+		bg_.setBounds(0, 0, 751, 394);
+		bg_.setIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\log_in\\bg_login.png"));
+		contentPane.add(bg_);
+	}
+}
