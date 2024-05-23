@@ -13,7 +13,7 @@ import adminBD.ConexionBD;
 import clasesBDs.CBDAbstract;
 
 public abstract class CCAbstract<M extends CBDAbstract> {
-	
+
 	protected String nombreTabla;
 
 	ConexionBD con = new ConexionBD();
@@ -39,38 +39,32 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 		return opcion;
 	}
 	
-	public M getRegistro(String columna, int id) {
+	public M getRegistro(String columna, String id) {
 		
 		try {
-			sql = "SELECT * FROM ? WHERE ? = ?;";
-	        ps = conexion.prepareCall(sql);
-	        ps.setString(1, this.nombreTabla);
-	        ps.setString(2, columna);
-	        ps.setInt(3, id);
+			sql = "SELECT * FROM " + this.nombreTabla + " WHERE " + columna + " =? AND activo = 'activo';";
+	        ps = conexion.prepareStatement(sql);
+	        ps.setString(1, id);
 	        rs = ps.executeQuery();
-	        
-	        if (rs.getString("activo").equals("activo")) {
-	            return this.llenar(rs);
-	        } else {
-	        	return null;
+	        if (rs.next()) {
+		        M r = this.llenar(rs);
+		        return r;
 	        }
-	        
+	        return null;
 		} catch (SQLException e) {
 	    	e.printStackTrace();
 	    	return null;
 	    }
 	}
 	
-	public ArrayList<M> getRegistroList(String columna, int id) {
+	public ArrayList getRegistroList(String columna, String id) {
 		
 		try {
 			
 			ArrayList<M> uss = new ArrayList<>();
-			sql = "SELECT * FROM ? WHERE ? = ?;";
-	        ps = conexion.prepareCall(sql);
-	        ps.setString(1, this.nombreTabla);
-	        ps.setString(1, columna);
-	        ps.setInt(2, id);
+			sql = "SELECT * FROM " + this.nombreTabla + " WHERE " + columna + " =? AND activo = 'activo';";
+	        ps = conexion.prepareStatement(sql);
+	        ps.setString(1, id);
 	        rs = ps.executeQuery();
 
         	while (rs.next()) {
@@ -84,7 +78,5 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 	    	return null;
 	    }
 	}
-	
     protected abstract M llenar(ResultSet rs);
-    
 }
