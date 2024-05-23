@@ -3,6 +3,7 @@ package controladores;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import adminBD.ConexionBD;
 import clasesBDs.Usuario;
@@ -34,6 +35,22 @@ public class CUsuario extends CCAbstract {
 	    	e.printStackTrace();
 	    }
     }
+	
+	public Usuario checkPassword(String nombre, String password) {
+		Usuario us = (Usuario) this.getRegistro("nombre", nombre);
+		if (us != null && us.getPassword().equals(password)) {
+			return us;
+		}
+		return null;
+	}
+	
+	public ArrayList<Usuario> checkPasswordl(String nombre, String password) {
+		ArrayList<Usuario> us = this.getRegistroList("nombre", nombre);
+		if (us != null) {
+			return us;
+		}
+		return null;
+	}
 	
 	@Override
 	public Usuario llenar(ResultSet r) {
