@@ -42,6 +42,7 @@ public class sign_up extends JFrame {
 	 * Create the frame.
 	 */
 	public sign_up() {
+		this.setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 767, 433);
 		contentPane = new JPanel();
@@ -50,15 +51,17 @@ public class sign_up extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\sign_up\\img\\img_icon.png"));
-		lblNewLabel.setBounds(90, 94, 155, 174);
-		contentPane.add(lblNewLabel);
+		JLabel img_icon = new JLabel("");
+		img_icon.setIcon(new ImageIcon(sign_up.class.getResource("/recursos/front/front/front_elementos/usuario/sign_up/img/img_icon.png")));
+		img_icon.setBounds(90, 94, 155, 174);
+		contentPane.add(img_icon);
 		
-		JButton btn_YatienesUnUsuario_1 = new JButton("");
-		btn_YatienesUnUsuario_1.setIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\sign_up\\btn\\btn_registrarse.png"));
-		btn_YatienesUnUsuario_1.setBounds(478, 334, 91, 23);
-		contentPane.add(btn_YatienesUnUsuario_1);
+		JButton btn_registrarse = new JButton("");
+		btn_registrarse.setIcon(new ImageIcon(sign_up.class.getResource("/recursos/front/front/front_elementos/usuario/sign_up/btn/btn_registrarse.png")));
+		btn_registrarse.setBounds(478, 334, 91, 23);
+		btn_registrarse.setBorderPainted(false);
+		btn_registrarse.setContentAreaFilled(false);
+		contentPane.add(btn_registrarse);
 		
 		JButton btn_YatienesUnUsuario = new JButton("Ya tienes un Usuario?");
 		btn_YatienesUnUsuario.setSelectedIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\log_in\\btn\\btn_noTienesUnUsuario.png"));
@@ -134,7 +137,7 @@ public class sign_up extends JFrame {
 		
 		JLabel bg_ = new JLabel("");
 		bg_.setBounds(0, 0, 751, 394);
-		bg_.setIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\log_in\\bg_login.png"));
+		bg_.setIcon(new ImageIcon(sign_up.class.getResource("/recursos/front/front/front_elementos/usuario/sign_up/bg_signup.png")));
 		contentPane.add(bg_);
 	}
 }

@@ -39,6 +39,7 @@ public class log_in extends JFrame {
 	 * Create the frame.
 	 */
 	public log_in() {
+		this.setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 768, 433);
 		contentPane = new JPanel();
@@ -48,8 +49,10 @@ public class log_in extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btn_ingresar = new JButton("");
-		btn_ingresar.setIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\log_in\\btn\\btn_ingresar.png"));
+		btn_ingresar.setIcon(new ImageIcon(log_in.class.getResource("/recursos/front/front/front_elementos/usuario/log_in/btn/btn_ingresar.png")));
 		btn_ingresar.setBounds(495, 299, 85, 21);
+		btn_ingresar.setBorderPainted(false);
+		btn_ingresar.setContentAreaFilled(false);
 		contentPane.add(btn_ingresar);
 		
 		JButton btn_noTienesUsuarip = new JButton("¿No tienes un uuario?");
@@ -78,10 +81,10 @@ public class log_in extends JFrame {
 		textField.setBounds(314, 186, 266, 20);
 		contentPane.add(textField);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\log_in\\img\\img_icon.png"));
-		lblNewLabel_1.setBounds(112, 107, 155, 174);
-		contentPane.add(lblNewLabel_1);
+		JLabel img_icon = new JLabel("");
+		img_icon.setIcon(new ImageIcon(log_in.class.getResource("/recursos/front/front/front_elementos/usuario/log_in/img/img_icon.png")));
+		img_icon.setBounds(112, 107, 155, 174);
+		contentPane.add(img_icon);
 		
 		JLabel h1 = new JLabel("¡Bienvenido!");
 		h1.setForeground(Color.WHITE);
@@ -97,7 +100,7 @@ public class log_in extends JFrame {
 		
 		JLabel bg = new JLabel("");
 		bg.setBounds(-12, 0, 790, 406);
-		bg.setIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\log_in\\bg_login.png"));
+		bg.setIcon(new ImageIcon(log_in.class.getResource("/recursos/front/front/front_elementos/usuario/log_in/bg_login.png")));
 		contentPane.add(bg);
 	}
 }
