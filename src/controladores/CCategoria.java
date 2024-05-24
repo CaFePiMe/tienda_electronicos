@@ -27,7 +27,7 @@ public class CCategoria extends CCAbstract {
 	        ps.setInt(1, categoria.getPrimaryKey());
 	        ps.setString(2, categoria.getNombre());
 	        ps.setString(3, categoria.getDescripcion());
-	        ps.setString(4, categoria.getActivos());
+	        ps.setInt(4, categoria.getActivo());
 	        ps.executeUpdate();
 	    } catch (SQLException e) {
 	    	e.printStackTrace();

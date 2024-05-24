@@ -22,13 +22,13 @@ public class hp_producto extends JPanel {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("BJT NPN");
-		lblNewLabel.setBounds(159, 11, 161, 19);
 		lblNewLabel.setFont(new Font("Lufga SemiBold", Font.PLAIN, 14));
+		lblNewLabel.setBounds(160, 11, 168, 19);
 		add(lblNewLabel);
 		
 		JLabel p = new JLabel("Bs.500");
-		p.setBounds(164, 93, 46, 19);
 		p.setFont(new Font("Lufga SemiBold", Font.PLAIN, 14));
+		p.setBounds(164, 93, 46, 19);
 		add(p);
 		
 		JButton btn_sumar = new JButton("+");
@@ -36,21 +36,19 @@ public class hp_producto extends JPanel {
 		add(btn_sumar);
 		
 		JButton btn_menos = new JButton("-");
-		btn_menos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btn_menos.setBounds(297, 92, 37, 23);
+		btn_menos.setBounds(297, 92, 41, 23);
 		add(btn_menos);
 		
 		JButton btn_anadirCarrito = new JButton("");
+		btn_anadirCarrito.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_anadirCarrito.setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_añadirCarrito.png")));
 		btn_anadirCarrito.setBounds(339, 96, 77, 19);
+		btn_anadirCarrito.setBorderPainted(false);
+		btn_anadirCarrito.setContentAreaFilled(false);
 		add(btn_anadirCarrito);
-		
-		JLabel img_1 = new JLabel("");
-		img_1.setBounds(350, 74, 0, 0);
-		add(img_1);
 		
 		JTextArea txt_descripcion = new JTextArea();
 		txt_descripcion.setFont(new Font("Lufga", Font.PLAIN, 9));
@@ -59,9 +57,9 @@ public class hp_producto extends JPanel {
 		add(txt_descripcion);
 		
 		cantidad = new JTextField();
+		cantidad.setColumns(10);
 		cantidad.setBounds(266, 93, 26, 20);
 		add(cantidad);
-		cantidad.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/resistores.png")));

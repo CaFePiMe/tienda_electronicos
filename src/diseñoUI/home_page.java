@@ -13,6 +13,14 @@ import java.awt.Font;
 import javax.swing.JToggleButton;
 import javax.swing.JScrollBar;
 import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.JScrollPane;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.CardLayout;
+import javax.swing.BoxLayout;
 
 public class home_page extends JFrame {
 
@@ -50,20 +58,23 @@ public class home_page extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btn_administrarPerfil = new JButton("Administrar Perfil");
-		btn_administrarPerfil.setBounds(12, 317, 122, 23);
+		btn_administrarPerfil.setFont(new Font("Lufga", Font.PLAIN, 11));
+		btn_administrarPerfil.setBounds(12, 317, 131, 23);
 		contentPane.add(btn_administrarPerfil);
 		
 		JButton btn_categoría3 = new JButton("Categoría 3");
-		btn_categoría3.setBounds(28, 246, 89, 23);
+		btn_categoría3.setFont(new Font("Lufga", Font.PLAIN, 11));
+		btn_categoría3.setBounds(25, 246, 103, 23);
 		contentPane.add(btn_categoría3);
 		
 		JButton btn_categoría2 = new JButton("Categoría 2");
-		btn_categoría2.setBounds(29, 183, 89, 23);
+		btn_categoría2.setFont(new Font("Lufga", Font.PLAIN, 11));
+		btn_categoría2.setBounds(26, 183, 102, 23);
 		contentPane.add(btn_categoría2);
 		
 		JButton btn_search = new JButton("");
-		btn_search.setIcon(new ImageIcon(home_page.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_buscar.png")));
 		btn_search.setBounds(104, 35, 27, 23);
+		btn_search.setIcon(new ImageIcon(home_page.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_buscar.png")));
 		contentPane.add(btn_search);
 		
 		var_search = new JTextField();
@@ -72,25 +83,35 @@ public class home_page extends JFrame {
 		var_search.setColumns(10);
 		
 		JButton btn_categoría1 = new JButton("Categoría 1");
-		btn_categoría1.setBounds(31, 124, 89, 23);
+		btn_categoría1.setFont(new Font("Lufga", Font.PLAIN, 11));
+		btn_categoría1.setBounds(28, 124, 100, 23);
 		contentPane.add(btn_categoría1);
 		
 		JLabel bg_sidebar = new JLabel("");
-		bg_sidebar.setBounds(0, 0, 150, 433);
+		bg_sidebar.setBounds(0, 11, 150, 433);
 		bg_sidebar.setIcon(new ImageIcon(home_page.class.getResource("/recursos/front/front/front_elementos/usuario/menu/bg_sidebar.png")));
 		contentPane.add(bg_sidebar);
 		
 		JButton btn_carrito = new JButton("");
-		btn_carrito.setIcon(new ImageIcon(home_page.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_carrito.png")));
 		btn_carrito.setBounds(640, 310, 89, 71);
+		btn_carrito.setIcon(new ImageIcon(home_page.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_carrito.png")));
 		btn_carrito.setBorderPainted(false);
 		btn_carrito.setContentAreaFilled(false);
 		contentPane.add(btn_carrito);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBackground(new Color(0, 0, 160));
-		scrollBar.setForeground(new Color(0, 0, 160));
-		scrollBar.setBounds(170, 0, 565, 381);
-		contentPane.add(scrollBar);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(160, 11, 583, 370);
+		contentPane.add(scrollPane);
+
+        JPanel productoPanel = new JPanel();
+        productoPanel.setLayout(new BoxLayout(productoPanel, BoxLayout.Y_AXIS));
+        productoPanel.setPreferredSize(new Dimension(565, 5 * 132));
+        
+        for (int i = 0; i < 5; i++) {
+            hp_producto producto = new hp_producto();
+            productoPanel.add(producto);
+        }
+		
+		scrollPane.setViewportView(productoPanel);
 	}
 }

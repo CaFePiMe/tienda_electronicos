@@ -22,7 +22,7 @@ public class Carro extends CBDAbstract {
 	private void setBase() {
 		this.setNombreTabla("carro");
 		this.setCampoClavePrimaria("id_car");
-		this.setCampoExistencial("activo");
+		this.setActivo(1);
 	}
 	
 	public int getIDcom() {

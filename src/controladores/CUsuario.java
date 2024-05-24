@@ -8,13 +8,21 @@ import java.util.ArrayList;
 import adminBD.ConexionBD;
 import clasesBDs.Usuario;
 
-public class CUsuario extends CCAbstract {
+public class CUsuario extends CCAbstract<Usuario> {
 	
 	ConexionBD con = new ConexionBD();
 	Connection conexion = con.getConexion();
 	
 	public CUsuario() {
 		this.nombreTabla = "usuario";
+		
+		this.columnaLista.add("id_usu");
+		this.columnaLista.add("email");
+		this.columnaLista.add("nombre");
+		this.columnaLista.add("password");
+		this.columnaLista.add("nit");
+		this.columnaLista.add("admin");
+		this.columnaLista.add("activo");
 	}
 	
 	public void addUsuario(Usuario usuario) throws SQLException {
@@ -29,7 +37,7 @@ public class CUsuario extends CCAbstract {
 	        ps.setString(4, usuario.getPassword());
 	        ps.setInt(5, usuario.getNit());
 	        ps.setBoolean(6, usuario.getAdmin());
-	        ps.setString(7, usuario.getActivos());
+	        ps.setInt(7, usuario.getActivo());
 	        ps.executeUpdate();
 	    } catch (SQLException e) {
 	    	e.printStackTrace();
@@ -37,7 +45,8 @@ public class CUsuario extends CCAbstract {
     }
 	
 	public Usuario checkPassword(String nombre, String password) {
-		Usuario us = (Usuario) this.getRegistro("nombre", nombre);
+		Usuario us = this.getRegistro("nombre", nombre);
+		
 		if (us != null && us.getPassword().equals(password)) {
 			return us;
 		}

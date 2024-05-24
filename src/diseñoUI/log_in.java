@@ -7,16 +7,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
-import javax.swing.text.AbstractDocument;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.DocumentFilter;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class log_in extends JFrame {
 
@@ -97,40 +93,6 @@ public class log_in extends JFrame {
         textField.setBounds(314, 186, 266, 20);
         contentPane.add(textField);
         
-        // Aplicar DocumentFilter al textField para restringir la entrada a letras y dígitos
-        ((AbstractDocument) textField.getDocument()).setDocumentFilter(new DocumentFilter() {
-            @Override
-            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                if (string != null && string.matches("[a-zA-Z0-9]*")) {
-                    super.insertString(fb, offset, string, attr);
-                }
-            }
-
-            @Override
-            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                if (text != null && text.matches("[a-zA-Z0-9]*")) {
-                    super.replace(fb, offset, length, text, attrs);
-                }
-            }
-        });
-
-        // Aplicar DocumentFilter al passwordField para restringir la entrada a letras y dígitos
-        ((AbstractDocument) passwordField.getDocument()).setDocumentFilter(new DocumentFilter() {
-            @Override
-            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                if (string != null && string.matches("[a-zA-Z0-9]*")) {
-                    super.insertString(fb, offset, string, attr);
-                }
-            }
-
-            @Override
-            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                if (text != null && text.matches("[a-zA-Z0-9]*")) {
-                    super.replace(fb, offset, length, text, attrs);
-                }
-            }
-        });
-
         JLabel lblNewLabel_1 = new JLabel("");
         lblNewLabel_1.setIcon(new ImageIcon("G:\\progra-2\\tienda_electronicos\\src\\images\\usericon.png"));
         lblNewLabel_1.setBounds(53, 74, 256, 209);
