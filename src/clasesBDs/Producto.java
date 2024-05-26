@@ -24,7 +24,7 @@ public class Producto extends CBDAbstract {
 	private void setBase() {
 		this.setNombreTabla("producto");
 		this.setCampoClavePrimaria("id_pro");
-		this.setCampoExistencial("activo");
+		this.setActivo(1);
 	}
 	
 	public String getNombre() {

@@ -15,6 +15,7 @@ import clasesBDs.CBDAbstract;
 public abstract class CCAbstract<M extends CBDAbstract> {
 
 	protected String nombreTabla;
+	protected ArrayList<String> columnaLista;
 
 	ConexionBD con = new ConexionBD();
 	Connection conexion = con.getConexion();
@@ -26,7 +27,7 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 	public int numRegistros = 0; 
 	
 	public int borrarRegistro(M mdl) {
-		sql = "UPDATE " + mdl.getNombreTabla() + " SET " + mdl.getCampoExistencial() + " = 0 WHERE "
+		sql = "UPDATE " + mdl.getNombreTabla() + " SET activo = 0 WHERE "
 				+ mdl.getCampoClavePrimaria() + " = " + mdl.getPrimaryKey() + "";
 		int opcion = 0;
 		try {
@@ -39,10 +40,24 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 		return opcion;
 	}
 	
+	public void crearRegistro(String valores) {
+		try {
+			String cn = String.join(", ", this.columnaLista);
+			sql = "INSERT INTO " + this.nombreTabla + "(" + cn + ")"
+					+ "	VALUES (" + valores + ");";
+	        ps = conexion.prepareStatement(sql);
+	        rs = ps.executeQuery();
+			
+		} catch (SQLException e) {
+	    	e.printStackTrace();
+	    	return;
+	    }
+	}
+	
 	public M getRegistro(String columna, String id) {
 		
 		try {
-			sql = "SELECT * FROM " + this.nombreTabla + " WHERE " + columna + " =? AND activo = 'activo';";
+			sql = "SELECT * FROM " + this.nombreTabla + " WHERE " + columna + " =? AND activo = 1;";
 	        ps = conexion.prepareStatement(sql);
 	        ps.setString(1, id);
 	        rs = ps.executeQuery();
@@ -57,18 +72,18 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 	    }
 	}
 	
-	public ArrayList getRegistroList(String columna, String id) {
+	public ArrayList<M> getRegistroList(String columna, String id) {
 		
 		try {
 			
 			ArrayList<M> uss = new ArrayList<>();
-			sql = "SELECT * FROM " + this.nombreTabla + " WHERE " + columna + " =? AND activo = 'activo';";
+			sql = "SELECT * FROM " + this.nombreTabla + " WHERE " + columna + " =? AND activo = 1;";
 	        ps = conexion.prepareStatement(sql);
 	        ps.setString(1, id);
 	        rs = ps.executeQuery();
 
         	while (rs.next()) {
-    	        if (rs.getString("activo").equals("activo")) {
+    	        if (rs.getInt("activo") == 1) {
 		            uss.add(this.llenar(rs));
     	        }
         	}

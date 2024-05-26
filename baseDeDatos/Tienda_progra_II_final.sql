@@ -1,23 +1,27 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2024-05-17 23:37:28.654
+-- Last modification date: 2024-05-21 12:08:54.393
 
 -- tables
 -- Table: Valoracion
 CREATE TABLE Valoracion (
+    id_val int  NOT NULL,
     id_usu int  NOT NULL,
     id_pro int  NOT NULL,
     valoracion int  NOT NULL,
     comentario varchar(50)  NOT NULL,
-    CONSTRAINT Valoracion_pk PRIMARY KEY (id_usu,id_pro)
+    activo int  NOT NULL,
+    CONSTRAINT Valoracion_pk PRIMARY KEY (id_val)
 );
 
 -- Table: carro
 CREATE TABLE carro (
+    id_car int  NOT NULL,
     id_com int  NOT NULL,
     id_pro int  NOT NULL,
     cantidad int  NOT NULL,
-    precioun decimal(10,2)  NOT NULL,
-    CONSTRAINT carro_pk PRIMARY KEY (id_com,id_pro)
+    precio decimal(10,2)  NOT NULL,
+    activo int  NOT NULL,
+    CONSTRAINT carro_pk PRIMARY KEY (id_car)
 );
 
 -- Table: categoria
@@ -25,16 +29,18 @@ CREATE TABLE categoria (
     id_cat int  NOT NULL,
     nombre varchar(50)  NOT NULL,
     descripcion varchar(50)  NOT NULL,
+    activo int  NOT NULL,
     CONSTRAINT categoria_pk PRIMARY KEY (id_cat)
 );
 
 -- Table: compra
 CREATE TABLE compra (
     id_com int  NOT NULL,
+    id_usu int  NOT NULL,
     total decimal(10,2)  NOT NULL,
     estado varchar(50)  NOT NULL,
     fecha date  NOT NULL,
-    id_usu int  NOT NULL,
+    activo int  NOT NULL,
     CONSTRAINT compra_pk PRIMARY KEY (id_com)
 );
 
@@ -48,6 +54,7 @@ CREATE TABLE producto (
     precio decimal(10,2)  NOT NULL,
     stock int  NOT NULL,
     imagine varchar(50)  NOT NULL,
+    activo int  NOT NULL,
     CONSTRAINT producto_pk PRIMARY KEY (id_pro)
 );
 
@@ -56,6 +63,7 @@ CREATE TABLE proveedor (
     id_prv int  NOT NULL,
     nombre varchar(50)  NOT NULL,
     nit int  NOT NULL,
+    activo int  NOT NULL,
     CONSTRAINT proveedor_pk PRIMARY KEY (id_prv)
 );
 
@@ -67,6 +75,7 @@ CREATE TABLE usuario (
     password varchar(50)  NOT NULL,
     nit int  NOT NULL,
     admin boolean  NOT NULL,
+    activo int  NOT NULL,
     CONSTRAINT usuario_pk PRIMARY KEY (id_usu)
 );
 
