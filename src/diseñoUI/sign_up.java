@@ -106,6 +106,17 @@ public class sign_up extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             	System.out.println("yatieneusuario button clicked");
+            	
+            	dispose(); 
+                
+                EventQueue.invokeLater(() -> {
+                    try {
+                        log_in frame = new log_in();
+                        frame.setVisible(true);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
             }
         });
 		contentPane.add(btn_YatienesUnUsuario);

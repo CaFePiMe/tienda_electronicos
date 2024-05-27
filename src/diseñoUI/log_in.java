@@ -75,6 +75,17 @@ public class log_in extends JFrame {
                 
                 if(us != null) {
                     System.out.println("Contraseña correcta");
+                    
+                    dispose(); 
+                    
+                    EventQueue.invokeLater(() -> {
+                        try {
+                            home_page frame = new home_page();
+                            frame.setVisible(true);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    });
                 } else {
                     System.out.println("Contraseña equivocada");
                 }
@@ -88,6 +99,16 @@ public class log_in extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("No tienes un usuario? button clicked");
+                dispose(); 
+                
+                EventQueue.invokeLater(() -> {
+                    try {
+                        sign_up frame = new sign_up();
+                        frame.setVisible(true);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
             }
         });
 		contentPane.add(btn_noTienesUsuarip);
