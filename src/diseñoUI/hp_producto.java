@@ -22,7 +22,7 @@ public class hp_producto extends JPanel {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("BJT NPN");
-		lblNewLabel.setBounds(159, 11, 161, 19);
+		lblNewLabel.setBounds(160, 11, 168, 19);
 		lblNewLabel.setFont(new Font("Lufga SemiBold", Font.PLAIN, 14));
 		add(lblNewLabel);
 		

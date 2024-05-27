@@ -13,6 +13,15 @@ import java.awt.Font;
 import javax.swing.JToggleButton;
 import javax.swing.JScrollBar;
 import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.JScrollPane;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.CardLayout;
+import javax.swing.BoxLayout;
 
 public class home_page extends JFrame {
 
@@ -62,8 +71,8 @@ public class home_page extends JFrame {
 		contentPane.add(btn_categoría2);
 		
 		JButton btn_search = new JButton("");
-		btn_search.setIcon(new ImageIcon(home_page.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_buscar.png")));
 		btn_search.setBounds(104, 35, 27, 23);
+		btn_search.setIcon(new ImageIcon(home_page.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_buscar.png")));
 		contentPane.add(btn_search);
 		
 		var_search = new JTextField();
@@ -81,16 +90,25 @@ public class home_page extends JFrame {
 		contentPane.add(bg_sidebar);
 		
 		JButton btn_carrito = new JButton("");
-		btn_carrito.setIcon(new ImageIcon(home_page.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_carrito.png")));
 		btn_carrito.setBounds(640, 310, 89, 71);
+		btn_carrito.setIcon(new ImageIcon(home_page.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_carrito.png")));
 		btn_carrito.setBorderPainted(false);
 		btn_carrito.setContentAreaFilled(false);
 		contentPane.add(btn_carrito);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBackground(new Color(0, 0, 160));
-		scrollBar.setForeground(new Color(0, 0, 160));
-		scrollBar.setBounds(170, 0, 565, 381);
-		contentPane.add(scrollBar);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(160, 11, 583, 370);
+		contentPane.add(scrollPane);
+
+        JPanel productoPanel = new JPanel();
+        productoPanel.setLayout(new BoxLayout(productoPanel, BoxLayout.Y_AXIS));
+        productoPanel.setPreferredSize(new Dimension(565, 5 * 132));
+        
+        for (int i = 0; i < 5; i++) {
+            hp_producto producto = new hp_producto();
+            productoPanel.add(producto);
+        }
+		
+		scrollPane.setViewportView(productoPanel);
 	}
 }

@@ -26,6 +26,10 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 	public String sql;
 	public int numRegistros = 0; 
 	
+	public CCAbstract() {
+        this.columnaLista = new ArrayList<>();
+    }
+	
 	public int borrarRegistro(M mdl) {
 		sql = "UPDATE " + mdl.getNombreTabla() + " SET activo = 0 WHERE "
 				+ mdl.getCampoClavePrimaria() + " = " + mdl.getPrimaryKey() + "";
@@ -44,13 +48,13 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 		try {
 			String cn = String.join(", ", this.columnaLista);
 			sql = "INSERT INTO " + this.nombreTabla + "(" + cn + ")"
-					+ "	VALUES (" + valores + ");";
+					+ "	VALUES ( gen_random_uuid()," + valores + ");";
 	        ps = conexion.prepareStatement(sql);
-	        rs = ps.executeQuery();
+	        ps.executeQuery();
 			
 		} catch (SQLException e) {
-	    	e.printStackTrace();
-	    	return;
+			System.err.println("Error al crear registro: " + e.getMessage());
+            e.printStackTrace();
 	    }
 	}
 	
@@ -67,8 +71,9 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 	        }
 	        return null;
 		} catch (SQLException e) {
-	    	e.printStackTrace();
-	    	return null;
+			System.err.println("Error al obtener registro: " + e.getMessage());
+            e.printStackTrace();
+            return null;
 	    }
 	}
 	
@@ -89,8 +94,9 @@ public abstract class CCAbstract<M extends CBDAbstract> {
         	}
 	        return uss;
 		} catch (SQLException e) {
-	    	e.printStackTrace();
-	    	return null;
+            System.err.println("Error al obtener lista de registros: " + e.getMessage());
+            e.printStackTrace();
+            return null;
 	    }
 	}
     protected abstract M llenar(ResultSet rs);

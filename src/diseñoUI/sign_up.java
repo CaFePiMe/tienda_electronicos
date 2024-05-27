@@ -83,6 +83,18 @@ public class sign_up extends JFrame {
                 System.out.println("Contraseña: " + contraseña);
                 System.out.println("Confirmación Contraseña: " + confirmacionContraseña);
                 System.out.println("NIT: " + nit);
+                
+                CUsuario cu = new CUsuario();
+                Usuario un = cu.getRegistro("nombre", usuario);
+                Usuario ue = cu.getRegistro("email", correo);
+                
+                if (ue != null || un != null || !contraseña.equals(confirmacionContraseña)) {
+                	System.out.println("error datos no adecuados");
+                } else {
+                	String nu = "'" + correo + "', '" + usuario + "', '" + contraseña + "', " + nit + ", false, 1";
+                    System.out.println(nu);
+                	cu.crearRegistro(nu);
+                }
             }
         });
 		contentPane.add(btn_registrarse);
