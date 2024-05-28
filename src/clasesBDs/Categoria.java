@@ -16,7 +16,7 @@ public class Categoria extends CBDAbstract {
 	private void setBase() {
 		this.setNombreTabla("categoria");
 		this.setCampoClavePrimaria("id_cat");
-		this.setCampoExistencial("activo");
+		this.setActivo(1);
 	}
 	
 	public String getNombre() {

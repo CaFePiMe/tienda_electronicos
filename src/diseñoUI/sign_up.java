@@ -5,10 +5,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import clasesBDs.Usuario;
+import controladores.CUsuario;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -61,11 +68,57 @@ public class sign_up extends JFrame {
 		btn_registrarse.setBounds(478, 334, 91, 23);
 		btn_registrarse.setBorderPainted(false);
 		btn_registrarse.setContentAreaFilled(false);
+		btn_registrarse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+            	String usuario = var_usuario.getText();
+                String correo = var_correo.getText();
+                String contraseña = var_contraseña.getText();
+                String confirmacionContraseña = var_ccontraseña.getText();
+                String nit = textField.getText();
+
+                System.out.println("Usuario: " + usuario);
+                System.out.println("Correo: " + correo);
+                System.out.println("Contraseña: " + contraseña);
+                System.out.println("Confirmación Contraseña: " + confirmacionContraseña);
+                System.out.println("NIT: " + nit);
+                
+                CUsuario cu = new CUsuario();
+                Usuario un = cu.getRegistro("nombre", usuario);
+                Usuario ue = cu.getRegistro("email", correo);
+                
+                if (ue != null || un != null || !contraseña.equals(confirmacionContraseña)) {
+                	System.out.println("error datos no adecuados");
+                } else {
+                	String nu = "'" + correo + "', '" + usuario + "', '" + contraseña + "', " + nit + ", false, 1";
+                    System.out.println(nu);
+                	cu.crearRegistro(nu);
+                }
+            }
+        });
 		contentPane.add(btn_registrarse);
 		
 		JButton btn_YatienesUnUsuario = new JButton("Ya tienes un Usuario?");
 		btn_YatienesUnUsuario.setSelectedIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\log_in\\btn\\btn_noTienesUnUsuario.png"));
 		btn_YatienesUnUsuario.setBounds(302, 300, 144, 23);
+		btn_YatienesUnUsuario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	System.out.println("yatieneusuario button clicked");
+            	
+            	dispose(); 
+                
+                EventQueue.invokeLater(() -> {
+                    try {
+                        log_in frame = new log_in();
+                        frame.setVisible(true);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
+            }
+        });
 		contentPane.add(btn_YatienesUnUsuario);
 		
 		JLabel h3_nit = new JLabel("NIT");

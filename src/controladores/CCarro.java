@@ -29,7 +29,7 @@ public class CCarro extends CCAbstract {
 	        ps.setInt(3, carro.getIDpro());
 	        ps.setInt(4, carro.getCantidad());
 	        ps.setDouble(5, carro.getPrecio());
-	        ps.setString(6, carro.getActivos());
+	        ps.setInt(6, carro.getActivo());
 	        ps.executeUpdate();
 	    } catch (SQLException e) {
 	    	e.printStackTrace();

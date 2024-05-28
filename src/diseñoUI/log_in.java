@@ -5,9 +5,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import clasesBDs.Usuario;
+import controladores.CUsuario;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -53,10 +59,58 @@ public class log_in extends JFrame {
 		btn_ingresar.setBounds(495, 299, 85, 21);
 		btn_ingresar.setBorderPainted(false);
 		btn_ingresar.setContentAreaFilled(false);
+		btn_ingresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Ingresar button clicked");
+                CUsuario cu = new CUsuario();
+                
+                String username = textField.getText();
+                String password = textField_1.getText();
+                
+                System.out.println("Nombre de usuario: " + username);
+                System.out.println("Contraseña: " + password);
+                
+                Usuario us = cu.checkPassword(username, password);
+                
+                if(us != null) {
+                    System.out.println("Contraseña correcta");
+                    
+                    dispose(); 
+                    
+                    EventQueue.invokeLater(() -> {
+                        try {
+                            home_page frame = new home_page();
+                            frame.setVisible(true);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    });
+                } else {
+                    System.out.println("Contraseña equivocada");
+                }
+            }
+        });
 		contentPane.add(btn_ingresar);
 		
 		JButton btn_noTienesUsuarip = new JButton("¿No tienes un uuario?");
 		btn_noTienesUsuarip.setBounds(313, 261, 139, 21);
+		btn_noTienesUsuarip.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("No tienes un usuario? button clicked");
+                dispose(); 
+                
+                EventQueue.invokeLater(() -> {
+                    try {
+                        sign_up frame = new sign_up();
+                        frame.setVisible(true);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
+            }
+        });
 		contentPane.add(btn_noTienesUsuarip);
 		
 		textField_1 = new JTextField();

@@ -9,10 +9,11 @@ package clasesBDs;
 public abstract class CBDAbstract {
 	
 	protected Integer primaryKey;
-	private String campoExistencial;
 	private String nombreTabla;
 	private String campoClavePrimaria;
-	private String activo;
+	private int activo;
+	public Object[] valoresGrabar;
+	
 	public String getCampoClavePrimaria() {
 		return campoClavePrimaria;
 	}
@@ -36,20 +37,12 @@ public abstract class CBDAbstract {
 	public void setPrimaryKey(Integer pk) {
 		primaryKey = pk;
 	}
-
-	public String getCampoExistencial() {
-		return campoExistencial;
-	}
-
-	public void setCampoExistencial(String campoExistencial) {
-		this.campoExistencial = campoExistencial;
-	}
 	
-	public String getActivos() {
+	public int getActivo() {
 		return activo;
 	}
 	
-	public void setActivos(String activo) {
+	public void setActivo(int activo) {
 		this.activo = activo;
 	}
 }
