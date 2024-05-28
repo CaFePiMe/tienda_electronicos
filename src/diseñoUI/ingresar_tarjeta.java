@@ -44,7 +44,7 @@ public class ingresar_tarjeta extends JFrame {
 	public ingresar_tarjeta() {
 		this.setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 766, 432);
+		setBounds(100, 100, 767, 433);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -112,9 +112,9 @@ public class ingresar_tarjeta extends JFrame {
 		textField_4.setBounds(34, 182, 104, 20);
 		contentPane.add(textField_4);
 		
-		JLabel int_total = new JLabel("Total ");
+		JLabel int_total = new JLabel("Total Bs.0");
 		int_total.setFont(new Font("Lufga Black", Font.PLAIN, 19));
-		int_total.setBounds(34, 276, 86, 26);
+		int_total.setBounds(34, 276, 104, 26);
 		contentPane.add(int_total);
 		
 		JButton btn_subir = new JButton("");

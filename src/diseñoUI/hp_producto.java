@@ -44,8 +44,14 @@ public class hp_producto extends JPanel {
 		add(btn_menos);
 		
 		JButton btn_anadirCarrito = new JButton("");
+		btn_anadirCarrito.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_anadirCarrito.setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_añadirCarrito.png")));
 		btn_anadirCarrito.setBounds(339, 96, 77, 19);
+		btn_anadirCarrito.setBorderPainted(false);
+		btn_anadirCarrito.setContentAreaFilled(false);
 		add(btn_anadirCarrito);
 		
 		JLabel img_1 = new JLabel("");
