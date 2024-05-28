@@ -9,6 +9,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JSeparator;
 
 public class hp_producto extends JPanel {
 
@@ -40,7 +41,7 @@ public class hp_producto extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btn_menos.setBounds(297, 92, 37, 23);
+		btn_menos.setBounds(297, 92, 41, 23);
 		add(btn_menos);
 		
 		JButton btn_anadirCarrito = new JButton("");
