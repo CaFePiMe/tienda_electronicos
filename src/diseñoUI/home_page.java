@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import clasesBDs.Producto;
+import controladores.CProducto;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
@@ -19,6 +23,7 @@ import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.awt.GridBagLayout;
 import java.awt.CardLayout;
 import javax.swing.BoxLayout;
@@ -28,6 +33,8 @@ public class home_page extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField var_search;
+
+	CProducto cp = new CProducto();
 
 	/**
 	 * Launch the application.
@@ -96,19 +103,26 @@ public class home_page extends JFrame {
 		btn_carrito.setContentAreaFilled(false);
 		contentPane.add(btn_carrito);
 		
+		ArrayList<Producto> productos = cp.getAllARegistros();
+		updateScroll(productos);
+	}
+	
+	public void updateScroll(ArrayList<Producto> productos) {
+		
+		int size = productos.size();
+		
 		JScrollPane scrollPane = new JScrollPane();
+		
 		scrollPane.setBounds(160, 11, 583, 370);
 		contentPane.add(scrollPane);
-
-        JPanel productoPanel = new JPanel();
-        productoPanel.setLayout(new BoxLayout(productoPanel, BoxLayout.Y_AXIS));
-        productoPanel.setPreferredSize(new Dimension(565, 5 * 132));
-        
-        for (int i = 0; i < 5; i++) {
-            hp_producto producto = new hp_producto();
-            productoPanel.add(producto);
-        }
 		
-		scrollPane.setViewportView(productoPanel);
+		JPanel productoPanel = new JPanel();
+        productoPanel.setLayout(new BoxLayout(productoPanel, BoxLayout.Y_AXIS));
+        productoPanel.setPreferredSize(new Dimension(565, size * 132));
+        
+		for (int i = 0; i < size; i++) {
+			hp_producto pro;
+            productoPanel.add(pro = new hp_producto(productos.get(i)));
+        }
 	}
 }
