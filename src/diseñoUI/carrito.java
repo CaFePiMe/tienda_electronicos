@@ -1,22 +1,33 @@
 package diseñoUI;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import clasesBDs.Producto;
+import controladores.CProducto;
+
 import javax.swing.JLabel;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class carrito extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	
+	CProducto cp = new CProducto();
 
 	/**
 	 * Launch the application.
@@ -69,8 +80,31 @@ public class carrito extends JFrame {
 		btn_compra.setContentAreaFilled(false);
 		contentPane.add(btn_compra);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(10, 89, 732, 293);
-		contentPane.add(scrollBar);
+		ArrayList<Producto> productos = cp.getAllARegistros();
+		updateScroll(productos);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 89, 732, 232);
+		contentPane.add(scrollPane);
 	}
+	
+	public void updateScroll(ArrayList<Producto> productos) {
+		
+		int size = productos.size();
+		
+		JScrollPane scrollPane = new JScrollPane();
+		
+		scrollPane.setBounds(160, 11, 583, 370);
+		contentPane.add(scrollPane);
+		
+		JPanel productoPanel = new JPanel();
+        productoPanel.setLayout(new BoxLayout(productoPanel, BoxLayout.Y_AXIS));
+        productoPanel.setPreferredSize(new Dimension(565, size * 132));
+        
+		for (int i = 0; i < size; i++) {
+			hp_producto pro;
+            productoPanel.add(pro = new hp_producto(productos.get(i)));
+        }
+	}
+
 }
