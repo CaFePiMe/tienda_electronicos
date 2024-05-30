@@ -65,7 +65,7 @@ public class log_in extends JFrame {
         btn_noTienesUsuarip.setBounds(319, 321, 179, 21);
         contentPane.add(btn_noTienesUsuarip);
 
-        // Agregar ActionListener al botón "¿No tienes un usuario?"
+        // Agregar ActionListener al botón "Registrarse"
         btn_noTienesUsuarip.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 sign_up signUpFrame = new sign_up(log_in.this); // Pasar la referencia del frame actual
@@ -77,7 +77,7 @@ public class log_in extends JFrame {
         
         passwordField = new JPasswordField();
         passwordField.setBounds(314, 231, 266, 20);
-        passwordField.setEchoChar('*'); // Establece el carácter de eco puede ser cualquier caracter.
+        passwordField.setEchoChar('*'); // Establece el carácter de eco, puede ser cualquier carácter.
         contentPane.add(passwordField);
         
         JLabel h3_contr = new JLabel("Contraseña");
@@ -97,7 +97,7 @@ public class log_in extends JFrame {
         textField.setBounds(314, 186, 266, 20);
         contentPane.add(textField);
         
-        // Apply the DocumentFilter to the textField to restrict input to letters and digits
+        // Aplicar DocumentFilter al textField para restringir la entrada a letras y dígitos
         ((AbstractDocument) textField.getDocument()).setDocumentFilter(new DocumentFilter() {
             @Override
             public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
@@ -114,7 +114,7 @@ public class log_in extends JFrame {
             }
         });
 
-        // Apply the DocumentFilter to the passwordField to restrict input to letters, digits, and no spaces
+        // Aplicar DocumentFilter al passwordField para restringir la entrada a letras y dígitos
         ((AbstractDocument) passwordField.getDocument()).setDocumentFilter(new DocumentFilter() {
             @Override
             public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {

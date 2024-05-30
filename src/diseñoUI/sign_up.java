@@ -181,6 +181,20 @@ public class sign_up extends JFrame {
                 // Tu código de registro aquí
             }
         });
+
+        // Configuración adicional del frame
+        this.setResizable(false);
+
+        // Añadir icono
+        JLabel img_icon = new JLabel("");
+        img_icon.setIcon(new ImageIcon(sign_up.class.getResource("/recursos/front/front/front_elementos/usuario/sign_up/img/img_icon.png")));
+        img_icon.setBounds(90, 94, 155, 174);
+        contentPane.add(img_icon);
+        
+        JLabel bg_ = new JLabel("");
+        bg_.setBounds(0, 0, 751, 394);
+        bg_.setIcon(new ImageIcon(sign_up.class.getResource("/recursos/front/front/front_elementos/usuario/sign_up/bg_signup.png")));
+        contentPane.add(bg_);
     }
 
     // Método para validar el usuario
@@ -188,15 +202,13 @@ public class sign_up extends JFrame {
         return usuario.matches("[a-zA-Z0-9]+");
     }
 
-    // Método para validar el correo
+    // Método para validar el correo electrónico
     private boolean validarCorreo(String correo) {
-        return correo.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}");
+        return correo.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
     }
 
- // Método para validar la contraseña
+    // Método para validar la contraseña
     private boolean validarContraseña(String contraseña) {
-        return contraseña.matches("[a-zA-Z]{4}[0-9]{3}");
-    
-
+        return contraseña.matches("^(?=.*[A-Za-z]{4})(?=.*\\d{3})[A-Za-z\\d]{7}$");
     }
 }
