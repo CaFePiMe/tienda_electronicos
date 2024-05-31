@@ -92,11 +92,6 @@ public class carrito extends JFrame {
 		
 		int size = productos.size();
 		
-		JScrollPane scrollPane = new JScrollPane();
-		
-		scrollPane.setBounds(160, 11, 583, 370);
-		contentPane.add(scrollPane);
-		
 		JPanel productoPanel = new JPanel();
         productoPanel.setLayout(new BoxLayout(productoPanel, BoxLayout.Y_AXIS));
         productoPanel.setPreferredSize(new Dimension(565, size * 132));

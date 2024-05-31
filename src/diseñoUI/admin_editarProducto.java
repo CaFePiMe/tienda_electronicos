@@ -43,22 +43,15 @@ public class admin_editarProducto extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(admin_editarProducto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/resistores.png")));
-		lblNewLabel_1.setBounds(55, 42, 55, 56);
-		contentPane.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel = new JLabel("ID_9002392");
-		lblNewLabel.setFont(new Font("Lufga Black", Font.PLAIN, 13));
-		lblNewLabel.setBounds(47, 109, 70, 14);
-		contentPane.add(lblNewLabel);
-		
 		JButton btn_anadirProducto = new JButton("");
 		btn_anadirProducto.setIcon(new ImageIcon(admin_editarProducto.class.getResource("/recursos/front/front/front_elementos/admin/editar_producto/btn/btn_añadirProducto.png")));
 		btn_anadirProducto.setBounds(620, 305, 89, 77);
 		btn_anadirProducto.setBorderPainted(false);
 		btn_anadirProducto.setContentAreaFilled(false);
 		contentPane.add(btn_anadirProducto);
+		
+		adm_producto pnl_producto = new adm_producto();
+		pnl_producto.setBounds(10, 11, 509, 139);
+		contentPane.add(pnl_producto);
 	}
-
 }
