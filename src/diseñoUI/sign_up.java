@@ -4,11 +4,18 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import clasesBDs.Usuario;
+import controladores.CUsuario;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -40,6 +47,7 @@ public class sign_up extends JFrame {
             }
         });
     }
+
 
     /**
      * Create the frame.
@@ -211,4 +219,152 @@ public class sign_up extends JFrame {
     private boolean validarContraseña(String contraseña) {
         return contraseña.matches("^(?=.*[A-Za-z]{4})(?=.*\\d{3})[A-Za-z\\d]{7}$");
     }
+	/**
+	 * Create the frame.
+	 */
+	public sign_up() {
+		this.setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 767, 433);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel img_icon = new JLabel("");
+		img_icon.setIcon(new ImageIcon(sign_up.class.getResource("/recursos/front/front/front_elementos/usuario/sign_up/img/img_icon.png")));
+		img_icon.setBounds(90, 94, 155, 174);
+		contentPane.add(img_icon);
+		
+		JButton btn_registrarse = new JButton("");
+		btn_registrarse.setIcon(new ImageIcon(sign_up.class.getResource("/recursos/front/front/front_elementos/usuario/sign_up/btn/btn_registrarse.png")));
+		btn_registrarse.setBounds(478, 334, 91, 23);
+		btn_registrarse.setBorderPainted(false);
+		btn_registrarse.setContentAreaFilled(false);
+		btn_registrarse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+            	String usuario = var_usuario.getText();
+                String correo = var_correo.getText();
+                String contraseña = var_contraseña.getText();
+                String confirmacionContraseña = var_ccontraseña.getText();
+                String nit = textField.getText();
+
+                System.out.println("Usuario: " + usuario);
+                System.out.println("Correo: " + correo);
+                System.out.println("Contraseña: " + contraseña);
+                System.out.println("Confirmación Contraseña: " + confirmacionContraseña);
+                System.out.println("NIT: " + nit);
+                
+                CUsuario cu = new CUsuario();
+                Usuario un = cu.getRegistro("nombre", usuario);
+                Usuario ue = cu.getRegistro("email", correo);
+                
+                if (ue != null || un != null || !contraseña.equals(confirmacionContraseña)) {
+                	System.out.println("error datos no adecuados");
+                } else {
+                	String nu = "'" + correo + "', '" + usuario + "', '" + contraseña + "', " + nit + ", false, 1";
+                    System.out.println(nu);
+                	cu.crearRegistro(nu);
+                }
+            }
+        });
+		contentPane.add(btn_registrarse);
+		
+		JButton btn_YatienesUnUsuario = new JButton("Ya tienes un Usuario?");
+		btn_YatienesUnUsuario.setSelectedIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\log_in\\btn\\btn_noTienesUnUsuario.png"));
+		btn_YatienesUnUsuario.setBounds(302, 300, 144, 23);
+		btn_YatienesUnUsuario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	System.out.println("yatieneusuario button clicked");
+            	
+            	dispose(); 
+                
+                EventQueue.invokeLater(() -> {
+                    try {
+                        log_in frame = new log_in();
+                        frame.setVisible(true);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
+            }
+        });
+		contentPane.add(btn_YatienesUnUsuario);
+		
+		JLabel h3_nit = new JLabel("NIT");
+		h3_nit.setForeground(Color.WHITE);
+		h3_nit.setFont(new Font("Lufga SemiBold", Font.PLAIN, 11));
+		h3_nit.setBounds(301, 252, 129, 14);
+		contentPane.add(h3_nit);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(302, 267, 266, 20);
+		contentPane.add(textField);
+		
+		var_ccontraseña = new JTextField();
+		var_ccontraseña.setColumns(10);
+		var_ccontraseña.setBounds(303, 223, 266, 20);
+		contentPane.add(var_ccontraseña);
+		
+		JLabel h3_ccontr = new JLabel("Confirmar contraseña");
+		h3_ccontr.setForeground(Color.WHITE);
+		h3_ccontr.setFont(new Font("Lufga SemiBold", Font.PLAIN, 11));
+		h3_ccontr.setBounds(302, 208, 129, 14);
+		contentPane.add(h3_ccontr);
+		
+		var_contraseña = new JTextField();
+		var_contraseña.setColumns(10);
+		var_contraseña.setBounds(303, 177, 266, 20);
+		contentPane.add(var_contraseña);
+		
+		JLabel h3_contr = new JLabel("Contraseña");
+		h3_contr.setForeground(Color.WHITE);
+		h3_contr.setFont(new Font("Lufga SemiBold", Font.PLAIN, 11));
+		h3_contr.setBounds(302, 162, 64, 14);
+		contentPane.add(h3_contr);
+		
+		var_correo = new JTextField();
+		var_correo.setColumns(10);
+		var_correo.setBounds(303, 133, 266, 20);
+		contentPane.add(var_correo);
+		
+		JLabel h3_corr = new JLabel("Correo");
+		h3_corr.setForeground(Color.WHITE);
+		h3_corr.setFont(new Font("Lufga SemiBold", Font.PLAIN, 11));
+		h3_corr.setBounds(302, 118, 46, 14);
+		contentPane.add(h3_corr);
+		
+		var_usuario = new JTextField();
+		var_usuario.setBounds(303, 94, 266, 20);
+		contentPane.add(var_usuario);
+		var_usuario.setColumns(10);
+		
+		JLabel h3 = new JLabel("Usuario");
+		h3.setFont(new Font("Lufga SemiBold", Font.PLAIN, 11));
+		h3.setForeground(new Color(255, 255, 255));
+		h3.setBounds(302, 79, 46, 14);
+		contentPane.add(h3);
+		
+		JLabel h2 = new JLabel("Registrate completando los espacios porfavor");
+		h2.setFont(new Font("Lufga", Font.PLAIN, 15));
+		h2.setForeground(new Color(255, 255, 255));
+		h2.setBounds(302, 58, 340, 20);
+		contentPane.add(h2);
+		
+		JLabel h1 = new JLabel("¡Bienvenido!");
+		h1.setFont(new Font("Lufga Black", Font.PLAIN, 35));
+		h1.setForeground(new Color(255, 255, 255));
+		h1.setBounds(302, 23, 223, 33);
+		contentPane.add(h1);
+		
+		JLabel bg_ = new JLabel("");
+		bg_.setBounds(0, 0, 751, 394);
+		bg_.setIcon(new ImageIcon(sign_up.class.getResource("/recursos/front/front/front_elementos/usuario/sign_up/bg_signup.png")));
+		contentPane.add(bg_);
+	}
 }

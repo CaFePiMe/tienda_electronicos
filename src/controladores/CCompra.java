@@ -29,7 +29,7 @@ public class CCompra extends CCAbstract {
 	        ps.setDouble(3, compra.getTotal());
 	        ps.setString(4, compra.getEstado());
 	        ps.setDate(5, compra.getFecha());
-	        ps.setString(6, compra.getActivos());
+	        ps.setInt(6, compra.getActivo());
 	        ps.executeUpdate();
 	    } catch (SQLException e) {
 	    	e.printStackTrace();
