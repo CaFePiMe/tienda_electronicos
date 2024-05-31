@@ -69,11 +69,8 @@ public class adm_producto extends JPanel {
                     Files.copy(selectedFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
                     this.path = targetFile.getName();
-                    
                     String resourcePath = "/recursos_productos/" + selectedFile.getName();
-
                     img_producto.setIcon(new ImageIcon(getClass().getResource(resourcePath)));
-                    System.out.println("Imagen cargada desde: " + resourcePath);
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
