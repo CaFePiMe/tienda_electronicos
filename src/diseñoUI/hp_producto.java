@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 import clasesBDs.Producto;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 public class hp_producto extends JPanel {
@@ -18,6 +20,9 @@ public class hp_producto extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField cantidad;
 	private int stock;
+	private JLabel[] estrellas;
+	private int rating = 0;
+
 
 	/**
 	 * Create the panel.
@@ -40,27 +45,25 @@ public class hp_producto extends JPanel {
 		JButton btn_sumar = new JButton("+");
 		btn_sumar.setBounds(220, 92, 41, 23);
 		btn_sumar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int cactual = Integer.parseInt(cantidad.getText());
-                if (cactual < stock) {
-                	cactual++;
-                    cantidad.setText(String.valueOf(cactual));
-                }
-            }
-        });
+			public void actionPerformed(ActionEvent e) {
+				int currentQuantity = Integer.parseInt(cantidad.getText());
+				currentQuantity++;
+				cantidad.setText(String.valueOf(currentQuantity));
+			}
+		});
 		add(btn_sumar);
 		
 		JButton btn_menos = new JButton("-");
-		btn_menos.setBounds(297, 92, 37, 23);
+		btn_menos.setBounds(297, 92, 41, 23);
 		btn_menos.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int cactual = Integer.parseInt(cantidad.getText());
-                if (cactual > 0) {
-                	cactual--;
-                    cantidad.setText(String.valueOf(cactual));
-                }
-            }
-        });
+			public void actionPerformed(ActionEvent e) {
+				int currentQuantity = Integer.parseInt(cantidad.getText());
+				if (currentQuantity > 1) {
+					currentQuantity--;
+					cantidad.setText(String.valueOf(currentQuantity));
+				}
+			}
+		});
 		add(btn_menos);
 		
 		JButton btn_anadirCarrito = new JButton("");
@@ -121,8 +124,39 @@ public class hp_producto extends JPanel {
 		star_3_1_1.setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
 		star_3_1_1.setBounds(438, 9, 26, 21);
 		add(star_3_1_1);
+		
+		// Crear las estrellas
+				estrellas = new JLabel[5];
+				for (int i = 0; i < estrellas.length; i++) {
+					estrellas[i] = new JLabel("");
+					estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
+					estrellas[i].setBounds(339 + (i * 25), 8, 26, 21);
+					final int index = i;
+					estrellas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							if (rating == index + 1) {
+								setRating(0);  // Desmarcar todas las estrellas
+							} else {
+								setRating(index + 1);  // Establecer la nueva calificación
+							}
+						}
+					});
+					add(estrellas[i]);
+				}
 
 	}
+	// Método para establecer la calificación
+		private void setRating(int rating) {
+			this.rating = rating;
+			for (int i = 0; i < estrellas.length; i++) {
+				if (i < rating) {
+					estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_star.png")));
+				} else {
+					estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
+				}
+			}
+		}
 	private void estrellas() {
 		
 		

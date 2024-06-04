@@ -63,15 +63,15 @@ public class administrar_perfil extends JFrame {
 		img_icon.setBounds(109, 147, 160, 155);
 		contentPane.add(img_icon);
 		
-		JTextField var_cambiarContraseña = new JTextField();
-		var_cambiarContraseña.setBounds(335, 171, 249, 20);
-		contentPane.add(var_cambiarContraseña);
-		var_cambiarContraseña.setColumns(10);
-		
 		JLabel h2_cambiarContraseña = new JLabel("Cambiar Contraseña");
 		h2_cambiarContraseña.setFont(new Font("Lufga SemiBold", Font.PLAIN, 11));
 		h2_cambiarContraseña.setBounds(335, 154, 124, 14);
 		contentPane.add(h2_cambiarContraseña);
+		
+		JTextField var_cambiarContraseña = new JTextField();
+		var_cambiarContraseña.setBounds(335, 171, 249, 20);
+		contentPane.add(var_cambiarContraseña);
+		var_cambiarContraseña.setColumns(10);
 		
 		JLabel h2_cambiarNIT = new JLabel("Cambiar NIT");
 		h2_cambiarNIT.setFont(new Font("Lufga SemiBold", Font.PLAIN, 11));

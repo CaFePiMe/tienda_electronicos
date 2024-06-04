@@ -58,10 +58,15 @@ public class carrito extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Total: Bs 0");
-		lblNewLabel.setFont(new Font("Lufga Black", Font.PLAIN, 25));
-		lblNewLabel.setBounds(32, 340, 147, 35);
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(carrito.class.getResource("/recursos/front/front/front_elementos/usuario/carrito/Img/img_carrito.png")));
+		lblNewLabel.setBounds(26, 4, 34, 67);
 		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel1 = new JLabel("Total: Bs 0");
+		lblNewLabel1.setFont(new Font("Lufga Black", Font.PLAIN, 25));
+		lblNewLabel1.setBounds(32, 340, 147, 35);
+		contentPane.add(lblNewLabel1);
 		
 		JLabel img_carrito = new JLabel("");
 		img_carrito.setIcon(new ImageIcon(carrito.class.getResource("/recursos/front/front/front_elementos/usuario/carrito/Img/img_carrito.png")));
@@ -75,6 +80,10 @@ public class carrito extends JFrame {
 		
 		JButton btn_compra = new JButton("");
 		btn_compra.setIcon(new ImageIcon(carrito.class.getResource("/recursos/front/front/front_elementos/usuario/carrito/btn/Btn_compraAhora.png")));
+		btn_compra.setBounds(574, 323, 111, 37);
+		btn_compra.setBorderPainted(false);		
+		btn_compra.setContentAreaFilled(false);
+		contentPane.add(btn_compra);
 		btn_compra.setBounds(606, 334, 118, 45);
 		btn_compra.setBorderPainted(false);		
 		btn_compra.setContentAreaFilled(false);

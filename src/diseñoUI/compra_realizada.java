@@ -1,7 +1,6 @@
 package diseñoUI;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,6 +9,8 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class compra_realizada extends JFrame {
 
@@ -72,6 +73,15 @@ public class compra_realizada extends JFrame {
 		btn_volver.setBounds(318, 289, 117, 31);
 		btn_volver.setBorderPainted(false);
 		btn_volver.setContentAreaFilled(false);
+		btn_volver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Cerrar la ventana actual
+				dispose();
+				// Abrir la ventana home_page
+				home_page home = new home_page();
+				home.setVisible(true);
+			}
+		});
 		contentPane.add(btn_volver);
 	}
 }

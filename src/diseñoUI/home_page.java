@@ -18,6 +18,9 @@ import javax.swing.JToggleButton;
 import javax.swing.JScrollBar;
 import java.awt.Color;
 import java.awt.Dimension;
+import javax.swing.JScrollPane;
+
+import java.awt.Dimension;
 
 import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
