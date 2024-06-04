@@ -14,10 +14,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
+
 import javax.swing.JToggleButton;
 import javax.swing.JScrollBar;
 import java.awt.Color;
 import java.awt.Dimension;
+
 import javax.swing.JScrollPane;
 
 import java.awt.Dimension;
