@@ -93,8 +93,8 @@ public class log_in extends JFrame {
         });
 		contentPane.add(btn_ingresar);
 		
-		JButton btn_noTienesUsuarip = new JButton("¿No tienes un uuario?");
-		btn_noTienesUsuarip.setBounds(313, 261, 139, 21);
+		JButton btn_noTienesUsuarip = new JButton("¿No tienes un usuario?");
+		btn_noTienesUsuarip.setBounds(313, 261, 168, 21);
 		btn_noTienesUsuarip.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
