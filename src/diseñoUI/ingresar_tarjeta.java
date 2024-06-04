@@ -47,11 +47,10 @@ public class ingresar_tarjeta extends JFrame {
 		setBounds(100, 100, 767, 433);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel h1 = new JLabel("Ingrese los datos de  su tarjeta");
+		JLabel h1 = new JLabel("Ingrese los datos de su tarjeta");
 		h1.setFont(new Font("Lufga Black", Font.PLAIN, 19));
 		h1.setForeground(new Color(255, 255, 255));
 		h1.setBounds(34, 27, 281, 26);
