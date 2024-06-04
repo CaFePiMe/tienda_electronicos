@@ -129,4 +129,6 @@ public class home_page extends JFrame {
             productoPanel.add(pro = new hp_producto(productos.get(i)));
         }
 	}
+	
+	
 }
