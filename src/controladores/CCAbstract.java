@@ -99,5 +99,28 @@ public abstract class CCAbstract<M extends CBDAbstract> {
             return null;
 	    }
 	}
+	
+public ArrayList<M> getAllARegistros() {
+		
+		try {
+			
+			ArrayList<M> uss = new ArrayList<>();
+			sql = "SELECT * FROM " + this.nombreTabla + ";";
+	        ps = conexion.prepareStatement(sql);
+	        rs = ps.executeQuery();
+
+        	while (rs.next()) {
+    	        if (rs.getInt("activo") == 1) {
+		            uss.add(this.llenar(rs));
+    	        }
+        	}
+	        return uss;
+		} catch (SQLException e) {
+            System.err.println("Error al obtener lista de registros: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+	    }
+	}
+
     protected abstract M llenar(ResultSet rs);
 }

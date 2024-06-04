@@ -26,7 +26,6 @@ public class CUsuario extends CCAbstract<Usuario> {
 	}
 	
 	public void addUsuario(Usuario usuario) throws SQLException {
-		this.
 	    sql = "INSERT INTO usuario (id_usu, email, nombre, password, nit, admin, activo)"
 	    		+ "VALUES (?, ?, ?, ?, ?, ?, ?);";
 	    try {
