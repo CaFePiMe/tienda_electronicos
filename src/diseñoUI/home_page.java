@@ -9,13 +9,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
-<<<<<<< HEAD
 import javax.swing.JToggleButton;
 import javax.swing.JScrollBar;
 import java.awt.Color;
 import java.awt.Dimension;
-=======
->>>>>>> 4675ee857f5817c9f557b823adce6fb47ca81e39
 import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
