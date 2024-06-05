@@ -165,6 +165,22 @@ public class sign_up extends JFrame {
         btn_YatienesUnUsuario_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Validar los campos antes de procesar el registro
+            	String usuario = var_usuario.getText();
+                String correo = var_correo.getText();
+                String contraseña = var_contraseña.getText();
+                String confirmacionContraseña = var_ccontraseña.getText();
+                String nit = textField.getText();
+
+                System.out.println("Usuario: " + usuario);
+                System.out.println("Correo: " + correo);
+                System.out.println("Contraseña: " + contraseña);
+                System.out.println("Confirmación Contraseña: " + confirmacionContraseña);
+                System.out.println("NIT: " + nit);
+                
+                CUsuario cu = new CUsuario();
+                Usuario un = cu.getRegistro("nombre", usuario);
+                Usuario ue = cu.getRegistro("email", correo);
+                
                 if (!validarUsuario(var_usuario.getText())) {
                     // Mostrar mensaje de error si el usuario no es válido
                     JOptionPane.showMessageDialog(sign_up.this, "El usuario solo puede contener letras y números.");
@@ -185,8 +201,13 @@ public class sign_up extends JFrame {
                     JOptionPane.showMessageDialog(sign_up.this, "Las contraseñas no coinciden.");
                     return;
                 }
-                // Si todas las validaciones pasan, puedes proceder con el registro
-                // Tu código de registro aquí
+                if (ue != null || un != null || !contraseña.equals(confirmacionContraseña)) {
+                	System.out.println("error datos no adecuados");
+                } else {
+                	String nu = "'" + correo + "', '" + usuario + "', '" + contraseña + "', " + nit + ", false, 1";
+                    System.out.println(nu);
+                	cu.crearRegistro(nu);
+                }
             }
         });
 
