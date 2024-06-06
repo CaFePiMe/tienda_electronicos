@@ -19,7 +19,9 @@ import clasesBDs.Categoria;
 import clasesBDs.Producto;
 import clasesBDs.Proveedor;
 import controladores.CCategoria;
+import controladores.CProducto;
 import controladores.CProveedor;
+import java.awt.event.ActionListener;
 
 public class adm_producto extends JPanel {
 
@@ -28,7 +30,7 @@ public class adm_producto extends JPanel {
 	private JTextField txf_stock;
 	private JTextField txf_distribuidor;
 	private JTextField txf_categoria;
-	private String path;
+	private String path = "imagen.png";
 	private JTextPane des_producto;
 	private JTextField txf_precio;
 
@@ -53,6 +55,7 @@ public class adm_producto extends JPanel {
 		add(img_producto);
 		
 		JButton btn_subirImagen = new JButton("");
+		
 		btn_subirImagen.setIcon(new ImageIcon(adm_producto.class.getResource("/recursos/front/front/front_elementos/admin/editar_producto/btn/btn_subirImagen.png")));
 		btn_subirImagen.setBounds(21, 89, 89, 23);
 		btn_subirImagen.setBorderPainted(false);
@@ -105,6 +108,8 @@ public class adm_producto extends JPanel {
             System.out.println("distribuidor: " + distribuidor);
             System.out.println("Categoría: " + categoria);
             System.out.println("Precio: " + precio);
+            System.out.println("Path: " + this.path);
+            
         });
 		add(btn_actualizar);
 		
@@ -170,6 +175,7 @@ public class adm_producto extends JPanel {
 		setLayout(null);
 		
 		des_producto = new JTextPane();
+		des_producto.setText(pro.getDescripcion());
 		des_producto.setBounds(179, 34, 285, 37);
 		add(des_producto);
 		
@@ -179,7 +185,8 @@ public class adm_producto extends JPanel {
 		add(h2_IdProducto);
 		
 		JLabel img_producto = new JLabel("");
-		img_producto.setIcon(new ImageIcon(adm_producto.class.getResource(pro.getImagen())));
+		String imgPath = "/recursos_productos/" + pro.getImagen();
+		img_producto.setIcon(new ImageIcon(hp_producto.class.getResource(imgPath)));
 		img_producto.setBounds(38, 9, 55, 56);
 		add(img_producto);
 		
@@ -231,11 +238,29 @@ public class adm_producto extends JPanel {
             String precio = txf_precio.getText().trim();
 
             System.out.println("Nombre: " + nombre);
-            System.out.println("Descripcin: " + descripcion);
+            System.out.println("Descripcion: " + descripcion);
             System.out.println("Stock: " + stock);
             System.out.println("distribuidor: " + distribuidor);
             System.out.println("Categoría: " + categoria);
             System.out.println("Precio: " + precio);
+            System.out.println("Path: " + this.path);
+            
+            CProducto cp = new CProducto();
+            
+            cp.upDateRegistro(pro, "nombre", "'" + nombre + "'");
+            cp.upDateRegistro(pro, "descripcion", "'" + descripcion + "'");
+            cp.upDateRegistro(pro, "stock", Integer.toString(stock) );
+            cp.upDateRegistro(pro, "precio", precio);
+            cp.upDateRegistro(pro, "imagen", "'" + this.path + "'");
+            
+            CProveedor cpro = new CProveedor();
+            CCategoria cc = new CCategoria();
+            
+            Proveedor idprv = (Proveedor) cpro.getRegistro("id_prv", distribuidor);
+            Categoria idcat = (Categoria) cc.getRegistro("id_cat", categoria);
+            
+            cp.upDateRegistro(pro, "id_prv", Integer.toString(idprv.getPrimaryKey()));
+            cp.upDateRegistro(pro, "id_cat", Integer.toString(idcat.getPrimaryKey()));
         });
 		add(btn_actualizar);
 		
@@ -288,7 +313,7 @@ public class adm_producto extends JPanel {
 		add(txf_distribuidor);
 		
 		txf_categoria = new JTextField();
-		txf_distribuidor.setText(Integer.toString(pro.getIdcat()));
+		txf_categoria.setText(Integer.toString(pro.getIdcat()));
 		txf_categoria.setBounds(179, 119, 70, 14);
 		add(txf_categoria);
 		txf_categoria.setColumns(10);
@@ -315,7 +340,8 @@ public class adm_producto extends JPanel {
         Proveedor idprv = (Proveedor) cp.getRegistro("id_prv", distribuidor);
         Categoria idcat = (Categoria) cc.getRegistro("id_cat", categoria);
         
-        String pr = "'" + idprv.getPrimaryKey() + "'" + idcat.getPrimaryKey() + "'" + nombre + "', '" + descripcion + "', '" + precio + "', " + stock + "', " + path + ", 1";
+        String pr = " " + idprv.getPrimaryKey() + ", " + idcat.getPrimaryKey() + ", '" + nombre + "', '" + descripcion + "', " + precio + ", " + stock + ", '" + path + "', 1";
+        System.out.println(pr);
         return pr;
     }
 }

@@ -73,7 +73,6 @@ public class log_in extends JFrame {
                 System.out.println("Contraseña: " + password);
                 
                 Usuario us = cu.checkPassword(username, password);
-                
                 if(us != null) {
                     System.out.println("Contraseña correcta");
                     
@@ -81,8 +80,13 @@ public class log_in extends JFrame {
                     
                     EventQueue.invokeLater(() -> {
                         try {
-                            home_page frame = new home_page();
-                            frame.setVisible(true);
+                        	if(us.getAdmin()) {
+                        		admin_verProducto frame = new admin_verProducto();
+                        		frame.setVisible(true);
+                        	}else {
+                        		home_page frame = new home_page();
+                                frame.setVisible(true);
+                        	}
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }

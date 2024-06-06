@@ -27,8 +27,8 @@ public class CUsuario extends CCAbstract<Usuario> {
 	}
 	
 	public Usuario checkPassword(String nombre, String password) {
-		Usuario us = this.getRegistro("nombre", nombre);
-		
+		Usuario us = this.getRegistro("nombre", "'" + nombre + "'");
+
 		if (us != null && us.getPassword().equals(password)) {
 			return us;
 		}
@@ -36,7 +36,8 @@ public class CUsuario extends CCAbstract<Usuario> {
 	}
 	
 	public ArrayList<Usuario> checkPasswordl(String nombre, String password) {
-		ArrayList<Usuario> us = this.getRegistroList("nombre", nombre);
+		
+		ArrayList<Usuario> us = this.getRegistroList("nombre", "'" + nombre + "'");
 		if (us != null) {
 			return us;
 		}

@@ -14,6 +14,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
 
 public class admin_editarProducto extends JFrame {
 
@@ -63,6 +64,7 @@ public class admin_editarProducto extends JFrame {
                
         // Botón del añadir producto con posición absoluta, en el JLayeredPane
         JButton btn_anadirProducto = new JButton("");
+        
         btn_anadirProducto.setIcon(new ImageIcon(admin_editarProducto.class.getResource("/recursos/front/front/front_elementos/admin/editar_producto/btn/btn_añadirProducto.png")));
         btn_anadirProducto.setBounds(620, 305, 89, 77);
         btn_anadirProducto.setBorderPainted(false);

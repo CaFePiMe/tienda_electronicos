@@ -20,6 +20,8 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class admin_verProducto extends JFrame {
 
@@ -88,6 +90,13 @@ public class admin_verProducto extends JFrame {
 		contentPane.add(bg_sidebar);
 		
 		JButton btn_carrito = new JButton("");
+		btn_carrito.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose(); 
+				admin_editarProducto frame = new admin_editarProducto();
+        		frame.setVisible(true);
+			}
+		});
 		btn_carrito.setBounds(640, 310, 89, 71);
 		btn_carrito.setIcon(new ImageIcon(home_page.class.getResource("/recursos/front/front/front_elementos/admin/editar_producto/btn/btn_añadirProducto.png")));
 		btn_carrito.setBorderPainted(false);
@@ -109,19 +118,12 @@ public class admin_verProducto extends JFrame {
 		
 		JPanel productoPanel = new JPanel();
         productoPanel.setLayout(new BoxLayout(productoPanel, BoxLayout.Y_AXIS));
-        /*productoPanel.setPreferredSize(new Dimension(565, size * 132));
+        productoPanel.setPreferredSize(new Dimension(565, size * 132));
         
 		for (int i = 0; i < size; i++) {
-			hp_producto pro;
-            productoPanel.add(pro = new hp_producto(productos.get(i)));
-        }*/
-        
-        productoPanel.setPreferredSize(new Dimension(565, 5 * 132));
-        
-        for (int i = 0; i < 5; i++) {
 			adm_producto pro;
-            productoPanel.add( pro = new adm_producto());
-        } 
+            productoPanel.add(pro = new adm_producto(productos.get(i)));
+        }
         scrollPane.setViewportView(productoPanel);
 	}
 }

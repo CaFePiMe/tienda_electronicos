@@ -45,6 +45,20 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 		return opcion;
 	}
 	
+	public int upDateRegistro(M mdl, String columna, String id) {
+		sql = "UPDATE " + mdl.getNombreTabla() + " SET " + columna + " = " + id + " WHERE "
+				+ mdl.getCampoClavePrimaria() + " = " + mdl.getPrimaryKey() + "";
+		int opcion = 0;
+		try {
+			opcion = ConexionBD.getStatement().executeUpdate(sql);
+			ConexionBD.cerrarEnlacesConexion(ConexionBD.SOLO_STATEMENT);
+		} catch (SQLException ex) {
+			Logger.getLogger(CCAbstract.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+		return opcion;
+	}
+	
 	public int lastID() {
 		try {
 			sql = "SELECT * FROM " + this.nombreTabla + " WHERE " + this.campoClavePrimaria + " = (SELECT MAX(" + this.campoClavePrimaria + ") FROM " + this.nombreTabla + ");";
@@ -81,6 +95,7 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 		try {
 			sql = "SELECT * FROM " + this.nombreTabla + " WHERE " + columna + " = " + id + " AND activo = 1;";
 	        ps = conexion.prepareStatement(sql);
+	        System.out.println(sql);
 	        rs = ps.executeQuery();
 	        if (rs.next()) {
 		        M r = this.llenar(rs);

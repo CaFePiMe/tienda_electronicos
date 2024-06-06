@@ -38,12 +38,12 @@ public class hp_producto extends JPanel {
 		add(lblNewLabel);
 		
 		JLabel p = new JLabel("Bs." + pro.getPrecio());
-		p.setBounds(164, 93, 46, 19);
+		p.setBounds(164, 93, 92, 19);
 		p.setFont(new Font("Lufga SemiBold", Font.PLAIN, 14));
 		add(p);
 		
 		JButton btn_sumar = new JButton("+");
-		btn_sumar.setBounds(220, 92, 41, 23);
+		btn_sumar.setBounds(280, 93, 41, 23);
 		btn_sumar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int currentQuantity = Integer.parseInt(cantidad.getText());
@@ -54,7 +54,7 @@ public class hp_producto extends JPanel {
 		add(btn_sumar);
 		
 		JButton btn_menos = new JButton("-");
-		btn_menos.setBounds(297, 92, 41, 23);
+		btn_menos.setBounds(357, 93, 41, 23);
 		btn_menos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int currentQuantity = Integer.parseInt(cantidad.getText());
@@ -68,7 +68,7 @@ public class hp_producto extends JPanel {
 		
 		JButton btn_anadirCarrito = new JButton("");
 		btn_anadirCarrito.setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_añadirCarrito.png")));
-		btn_anadirCarrito.setBounds(339, 96, 77, 19);
+		btn_anadirCarrito.setBounds(399, 97, 77, 19);
 		btn_anadirCarrito.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Product added to cart.");
@@ -87,12 +87,13 @@ public class hp_producto extends JPanel {
 		add(txt_descripcion);
 		
 		cantidad = new JTextField();
-		cantidad.setBounds(266, 93, 26, 20);
+		cantidad.setBounds(326, 94, 26, 20);
 		add(cantidad);
 		cantidad.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(hp_producto.class.getResource(pro.getImagen())));
+		String resourcePath = "/recursos_productos/" + pro.getImagen();
+		lblNewLabel_1.setIcon(new ImageIcon(hp_producto.class.getResource(resourcePath)));
 		lblNewLabel_1.setBounds(63, 36, 55, 56);
 		add(lblNewLabel_1);
 		
@@ -162,6 +163,4 @@ public class hp_producto extends JPanel {
 		
 		
 	}
-	
-	
 }

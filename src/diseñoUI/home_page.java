@@ -133,7 +133,6 @@ public class home_page extends JFrame {
 			hp_producto pro;
             productoPanel.add(pro = new hp_producto(productos.get(i)));
         }
+		scrollPane.setViewportView(productoPanel);
 	}
-	
-	
 }

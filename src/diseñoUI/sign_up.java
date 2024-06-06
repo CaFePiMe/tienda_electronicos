@@ -71,12 +71,12 @@ public class sign_up extends JFrame {
         
         JButton btn_Registrarse = new JButton("Registrarse");
         btn_Registrarse.setFont(new Font("Tahoma", Font.BOLD, 11));
-        btn_Registrarse.setIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\sign_up\\btn\\btn_registrarse.png"));
+        btn_Registrarse.setIcon(new ImageIcon());
         btn_Registrarse.setBounds(301, 298, 110, 23);
         contentPane.add(btn_Registrarse);
         
         JButton btn_YatienesUnUsuario = new JButton("Ya tienes un Usuario?");
-        btn_YatienesUnUsuario.setSelectedIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\log_in\\btn\\btn_noTienesUnUsuario.png"));
+        btn_YatienesUnUsuario.setSelectedIcon(new ImageIcon());
         btn_YatienesUnUsuario.setBounds(488, 360, 144, 23);
         contentPane.add(btn_YatienesUnUsuario);
 
@@ -295,7 +295,7 @@ public class sign_up extends JFrame {
 		contentPane.add(btn_registrarse);
 		
 		JButton btn_YatienesUnUsuario = new JButton("Ya tienes un Usuario?");
-		btn_YatienesUnUsuario.setSelectedIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\log_in\\btn\\btn_noTienesUnUsuario.png"));
+		btn_YatienesUnUsuario.setSelectedIcon(new ImageIcon());
 		btn_YatienesUnUsuario.setBounds(302, 300, 144, 23);
 		btn_YatienesUnUsuario.addActionListener(new ActionListener() {
             @Override
