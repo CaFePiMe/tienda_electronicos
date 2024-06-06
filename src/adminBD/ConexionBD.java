@@ -21,7 +21,7 @@ public class ConexionBD {
 	private static String host = "localhost";
 	private static String dataBase = "tienda_electronicos"; // nombre base de datos
 	private static String user = "postgres"; // usuario de la base de datos
-	private static String pass = "2487"; // contraseña de la base de datos
+	private static String pass = "admin"; // contraseña de la base de datos
 	public static int TODO = 1;
 	public static int SOLO_STATEMENT = 2;
 	public static int SOLO_RESULTSET = 3;

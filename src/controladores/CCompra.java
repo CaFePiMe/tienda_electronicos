@@ -16,6 +16,7 @@ public class CCompra extends CCAbstract {
 	
 	public CCompra() {
 		this.nombreTabla = "compra";
+		this.campoClavePrimaria = "id_com";
 	}
 	
 	public void addcompra(Compra compra) throws SQLException {
@@ -39,12 +40,14 @@ public class CCompra extends CCAbstract {
 	@Override
 	protected CBDAbstract llenar(ResultSet rs) {
 		try {
+			int idcom = rs.getInt("id_com");
 			int idusu = rs.getInt("id_usu");
 			Double total = rs.getDouble("total");
 			String estado = rs.getString("estado");
 			java.sql.Date fecha = rs.getDate("fecha");
 			String activo = rs.getString("activo");
             Compra co = new Compra( idusu, total, estado, fecha);
+            co.setPrimaryKey(idcom);
         	
             return co;
 		} catch (SQLException e) {

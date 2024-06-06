@@ -69,11 +69,11 @@ public class sign_up extends JFrame {
         lblNewLabel.setBounds(0, 58, 245, 210);
         contentPane.add(lblNewLabel);
         
-        JButton btn_YatienesUnUsuario_1 = new JButton("Registrarse");
-        btn_YatienesUnUsuario_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-        btn_YatienesUnUsuario_1.setIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\sign_up\\btn\\btn_registrarse.png"));
-        btn_YatienesUnUsuario_1.setBounds(301, 298, 110, 23);
-        contentPane.add(btn_YatienesUnUsuario_1);
+        JButton btn_Registrarse = new JButton("Registrarse");
+        btn_Registrarse.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btn_Registrarse.setIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\sign_up\\btn\\btn_registrarse.png"));
+        btn_Registrarse.setBounds(301, 298, 110, 23);
+        contentPane.add(btn_Registrarse);
         
         JButton btn_YatienesUnUsuario = new JButton("Ya tienes un Usuario?");
         btn_YatienesUnUsuario.setSelectedIcon(new ImageIcon("C:\\Users\\Sebastian\\Documents\\tienda_electronicos\\front\\front\\front_elementos\\usuario\\log_in\\btn\\btn_noTienesUnUsuario.png"));
@@ -162,7 +162,7 @@ public class sign_up extends JFrame {
         contentPane.add(h1);
         
         // Añadir ActionListener al botón de registrarse
-        btn_YatienesUnUsuario_1.addActionListener(new ActionListener() {
+        btn_Registrarse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Validar los campos antes de procesar el registro
             	String usuario = var_usuario.getText();

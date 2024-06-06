@@ -15,6 +15,7 @@ public class CUsuario extends CCAbstract<Usuario> {
 	
 	public CUsuario() {
 		this.nombreTabla = "usuario";
+		this.campoClavePrimaria = "id_usu";
 		
 		this.columnaLista.add("id_usu");
 		this.columnaLista.add("email");
@@ -24,24 +25,6 @@ public class CUsuario extends CCAbstract<Usuario> {
 		this.columnaLista.add("admin");
 		this.columnaLista.add("activo");
 	}
-	
-	public void addUsuario(Usuario usuario) throws SQLException {
-	    sql = "INSERT INTO usuario (id_usu, email, nombre, password, nit, admin, activo)"
-	    		+ "VALUES (?, ?, ?, ?, ?, ?, ?);";
-	    try {
-	        ps = conexion.prepareCall(sql);
-	        ps.setInt(1, usuario.getPrimaryKey());
-	        ps.setString(2, usuario.getEMail());
-	        ps.setString(3, usuario.getNombre());
-	        ps.setString(4, usuario.getPassword());
-	        ps.setInt(5, usuario.getNit());
-	        ps.setBoolean(6, usuario.getAdmin());
-	        ps.setInt(7, usuario.getActivo());
-	        ps.executeUpdate();
-	    } catch (SQLException e) {
-	    	e.printStackTrace();
-	    }
-    }
 	
 	public Usuario checkPassword(String nombre, String password) {
 		Usuario us = this.getRegistro("nombre", nombre);
@@ -63,12 +46,14 @@ public class CUsuario extends CCAbstract<Usuario> {
 	@Override
 	public Usuario llenar(ResultSet r) {
 		try {
+			int idusu = rs.getInt("id_usu");
 			String email = r.getString("email");
 	        String nombre = r.getString("nombre");
 	        String password = r.getString("password");
 	        int nit = r.getInt("nit");
 	        boolean admin = r.getBoolean("admin");
 	        Usuario us = new Usuario(email, nombre, password, nit, admin);
+	        us.setPrimaryKey(idusu);
 			return us;
 			
 		} catch (SQLException e) {

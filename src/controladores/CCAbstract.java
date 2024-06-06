@@ -16,6 +16,7 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 
 	protected String nombreTabla;
 	protected ArrayList<String> columnaLista;
+	protected String campoClavePrimaria;
 
 	ConexionBD con = new ConexionBD();
 	Connection conexion = con.getConexion();
@@ -44,11 +45,28 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 		return opcion;
 	}
 	
+	public int lastID() {
+		try {
+			sql = "SELECT * FROM " + this.nombreTabla + " WHERE " + this.campoClavePrimaria + " = (SELECT MAX(" + this.campoClavePrimaria + ") FROM " + this.nombreTabla + ");";
+		    ps = conexion.prepareStatement(sql);
+	        rs = ps.executeQuery();
+	        if (rs.next()) {
+		        M r = this.llenar(rs);
+		        return r.getPrimaryKey();
+	        }
+	        return (Integer) null;
+		} catch (SQLException e) {
+			System.err.println("Error al obtener registro: " + e.getMessage());
+            e.printStackTrace();
+            return (Integer) null;
+	    }
+	}
+	
 	public void crearRegistro(String valores) {
 		try {
 			String cn = String.join(", ", this.columnaLista);
 			sql = "INSERT INTO " + this.nombreTabla + "(" + cn + ")"
-					+ "	VALUES ( gen_random_uuid()," + valores + ");";
+					+ "	VALUES ( " + (this.lastID()+1) + ", " + valores + ");";
 	        ps = conexion.prepareStatement(sql);
 	        ps.executeQuery();
 			
@@ -61,9 +79,8 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 	public M getRegistro(String columna, String id) {
 		
 		try {
-			sql = "SELECT * FROM " + this.nombreTabla + " WHERE " + columna + " =? AND activo = 1;";
+			sql = "SELECT * FROM " + this.nombreTabla + " WHERE " + columna + " = " + id + " AND activo = 1;";
 	        ps = conexion.prepareStatement(sql);
-	        ps.setString(1, id);
 	        rs = ps.executeQuery();
 	        if (rs.next()) {
 		        M r = this.llenar(rs);

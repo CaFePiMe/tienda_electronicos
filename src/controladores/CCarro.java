@@ -16,6 +16,7 @@ public class CCarro extends CCAbstract {
 	
 	public CCarro() {
 		this.nombreTabla = "carro";
+		this.campoClavePrimaria = "id_car";
 	}
 	
 	public void addCarro(Carro carro) throws SQLException {
@@ -39,11 +40,13 @@ public class CCarro extends CCAbstract {
 	@Override
 	public Carro llenar(ResultSet r) {
 		try {
+			int idcar = rs.getInt("id_car");
 			int idcom = rs.getInt("id_com");
             int idpro = rs.getInt("id_pro");
             int cantidad = rs.getInt("cantidad");
             double precio = rs.getInt("precio");
             Carro ca = new Carro(idcom, idpro, cantidad, precio);
+            ca.setPrimaryKey(idcar);
         	
             return ca;
 		} catch (SQLException e) {

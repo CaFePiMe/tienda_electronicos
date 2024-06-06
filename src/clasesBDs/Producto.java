@@ -2,6 +2,8 @@ package clasesBDs;
 
 public class Producto extends CBDAbstract {
 	
+	private int idprv;
+	private int idcat;
 	private String nombre;
 	private String descripcion;
 	private String imagen;
@@ -12,8 +14,10 @@ public class Producto extends CBDAbstract {
 		setBase();
 	}
 	
-	public Producto(String nombre, String descripcion, String imagen, int stock, double precio) {
+	public Producto(int idprv, int idcat, String nombre, String descripcion, String imagen, int stock, double precio) {
 		setBase();
+		this.idprv = idprv;
+		this.idcat = idcat;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.imagen = imagen;
@@ -66,4 +70,20 @@ public class Producto extends CBDAbstract {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
+	
+    public int getIdcat() {
+        return this.idcat;
+    }
+
+    public void setIdcat(int idcat) {
+        this.idcat = idcat;
+    }
+
+    public int getIdprv() {
+        return this.idprv;
+    }
+
+    public void setIdprv(int idprv) {
+        this.idprv = idprv;
+    }
 }
