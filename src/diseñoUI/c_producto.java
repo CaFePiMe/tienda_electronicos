@@ -103,13 +103,12 @@ public class c_producto extends JPanel {
             		System.out.println("updated");
             	} else {
             		System.out.println("Product valorado");
-                    String nu = "'" + us.getPrimaryKey() + "', '" + pro.getPrimaryKey() + "', '" + rating + "', " + txt_comentario.getText() + ", 1";
+                    String nu = "'" + us.getPrimaryKey() + "', '" + pro.getPrimaryKey() + "', '" + rating + "', '" + txt_comentario.getText() + "', 1";
                     
                     cv.crearRegistro(nu);
                     System.out.println("register");
             	}
 				
-				cv.crearRegistro(resourcePath);
 				
 			}
 		});

@@ -20,7 +20,7 @@ public class CValoracion extends CCAbstract<Valoracion> {
 		this.columnaLista.add("id_usu");
 		this.columnaLista.add("id_pro");
 		this.columnaLista.add("valoracion");
-		this.columnaLista.add("comantario");
+		this.columnaLista.add("comentario");
 		this.columnaLista.add("activo");
 	}
 	
