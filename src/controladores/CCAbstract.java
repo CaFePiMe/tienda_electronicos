@@ -118,6 +118,7 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 			ArrayList<M> uss = new ArrayList<>();
 			sql = "SELECT * FROM " + this.nombreTabla + " WHERE " + columna + " = " + id + " AND activo = 1;";
 	        ps = conexion.prepareStatement(sql);
+	        System.out.println(sql);
 	        rs = ps.executeQuery();
 
         	while (rs.next()) {

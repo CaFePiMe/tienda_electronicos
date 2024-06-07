@@ -3,24 +3,35 @@ package diseñoUI;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JTextField;
 
 import clasesBDs.Carro;
 import clasesBDs.Producto;
 import clasesBDs.Usuario;
+import clasesBDs.Valoracion;
 import controladores.CCarro;
+import controladores.CValoracion;
 
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class c_producto extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private Producto pro;
+	private JLabel[] estrellas;
+	private int rating = 0;
 	private Usuario us;
 	private Carro ca;
+	
+	CValoracion cv = new CValoracion();
 
 	/**
 	 * Create the panel.
@@ -43,6 +54,11 @@ public class c_producto extends JPanel {
 		img_producto.setIcon(new ImageIcon(hp_producto.class.getResource(resourcePath)));
 		img_producto.setBounds(35, 9, 67, 67);
 		add(img_producto);
+		
+		JTextArea txt_comentario = new JTextArea();
+		txt_comentario.setFont(new Font("Lufga", Font.PLAIN, 12));
+		txt_comentario.setBounds(141, 38, 531, 111);
+		add(txt_comentario);
 		
 		textField = new JTextField();
 		textField.setText(Integer.toString(ca.getCantidad()));
@@ -73,6 +89,30 @@ public class c_producto extends JPanel {
 		add(btn_menos);
 		
 		JButton btn_dejarComentario = new JButton("");
+		btn_dejarComentario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String call = pro.getCampoClavePrimaria() + " = " + pro.getPrimaryKey() + " AND " + us.getCampoClavePrimaria();
+            	
+            	Valoracion val = (Valoracion) cv.getRegistro(call, Integer.toString(us.getPrimaryKey()));
+            	
+            	System.out.println("btn_anadirCarrito");
+            	
+            	if(val != null) {
+            		cv.upDateRegistro(val, "valoracion", Integer.toString(rating));
+            		System.out.println("updated");
+            	} else {
+            		System.out.println("Product valorado");
+                    String nu = "'" + us.getPrimaryKey() + "', '" + pro.getPrimaryKey() + "', '" + rating + "', " + txt_comentario.getText() + ", 1";
+                    
+                    cv.crearRegistro(nu);
+                    System.out.println("register");
+            	}
+				
+				cv.crearRegistro(resourcePath);
+				
+			}
+		});
 		btn_dejarComentario.setIcon(new ImageIcon(c_producto.class.getResource("/recursos/front/front/front_elementos/usuario/carrito/btn/btn_dejarComentario.png")));
 		btn_dejarComentario.setBounds(18, 136, 89, 23);
 		btn_dejarComentario.setBorderPainted(false);
@@ -84,40 +124,31 @@ public class c_producto extends JPanel {
 		h3_costo.setBounds(10, 123, 117, 14);
 		add(h3_costo);
 		
-		JTextArea txt_comentario = new JTextArea();
-		txt_comentario.setFont(new Font("Lufga", Font.PLAIN, 12));
-		txt_comentario.setBounds(141, 38, 531, 111);
-		add(txt_comentario);
+		
 		
 		JLabel h2_Usuario = new JLabel(us.getNombre());
 		h2_Usuario.setFont(new Font("Lufga SemiBold", Font.PLAIN, 13));
 		h2_Usuario.setBounds(145, 18, 138, 14);
 		add(h2_Usuario);
 		
-		JLabel star_2 = new JLabel("");
-		star_2.setIcon(new ImageIcon(c_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
-		star_2.setBounds(318, 10, 26, 21);
-		add(star_2);
-		
-		JLabel star = new JLabel("");
-		star.setIcon(new ImageIcon(c_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
-		star.setBounds(293, 10, 26, 21);
-		add(star);
-		
-		JLabel star_3 = new JLabel("");
-		star_3.setIcon(new ImageIcon(c_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
-		star_3.setBounds(343, 10, 26, 21);
-		add(star_3);
-		
-		JLabel star_3_1 = new JLabel("");
-		star_3_1.setIcon(new ImageIcon(c_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
-		star_3_1.setBounds(368, 11, 26, 21);
-		add(star_3_1);
-		
-		JLabel star_3_1_1 = new JLabel("");
-		star_3_1_1.setIcon(new ImageIcon(c_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
-		star_3_1_1.setBounds(392, 11, 26, 21);
-		add(star_3_1_1);
+		estrellas = new JLabel[5];
+		for (int i = 0; i < estrellas.length; i++) {
+			estrellas[i] = new JLabel("");
+			estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
+			estrellas[i].setBounds(339 + (i * 25), 8, 26, 21);
+			final int index = i;
+			estrellas[i].addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if (rating == index + 1) {
+						setRating(0);  // Desmarcar todas las estrellas
+					} else {
+						setRating(index + 1);  // Establecer la nueva calificación
+					}
+				}
+			});
+			add(estrellas[i]);
+		}
 	}
 	
 	private void updateCantidad(int cantidad) {
@@ -127,4 +158,14 @@ public class c_producto extends JPanel {
 		cc.upDateRegistro(ca, "cantidad", Integer.toString(cantidad));
 		System.out.println("updated");
 	}
+	private void setRating(int rating) {
+		this.rating = rating;
+		for (int i = 0; i < estrellas.length; i++) {
+			if (i < rating) {
+				estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_star.png")));
+			} else {
+				estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
+			}
+		}
+}
 }

@@ -86,9 +86,24 @@ public class home_page extends JFrame {
 		JButton btn_categoría2 = new JButton("Categoría 2");
 		btn_categoría2.setFont(new Font("Lufga", Font.PLAIN, 11));
 		btn_categoría2.setBounds(26, 183, 102, 23);
+		btn_categoría2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ArrayList<Producto> productos = cp.getRegistroList("id_cat", "2");
+				updateScroll(productos);
+				
+			}
+		});
 		contentPane.add(btn_categoría2);
 		
 		JButton btn_search = new JButton("");
+		btn_search.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ArrayList<Producto> productos = cp.getRegistroList("nombre", "'" + var_search.getText() + "'");
+				updateScroll(productos);
+			}
+		});
 		btn_search.setBounds(104, 35, 27, 23);
 		btn_search.setIcon(new ImageIcon(home_page.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_buscar.png")));
 		contentPane.add(btn_search);
@@ -99,6 +114,14 @@ public class home_page extends JFrame {
 		var_search.setColumns(10);
 		
 		JButton btn_categoría1 = new JButton("Categoría 1");
+		btn_categoría1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ArrayList<Producto> productos = cp.getRegistroList("id_cat", "1");
+				updateScroll(productos);
+				
+			}
+		});
 		btn_categoría1.setFont(new Font("Lufga", Font.PLAIN, 11));
 		btn_categoría1.setBounds(28, 124, 100, 23);
 		contentPane.add(btn_categoría1);
@@ -143,6 +166,8 @@ public class home_page extends JFrame {
 		JPanel productoPanel = new JPanel();
         productoPanel.setLayout(new BoxLayout(productoPanel, BoxLayout.Y_AXIS));
         productoPanel.setPreferredSize(new Dimension(565, size * 132));
+        
+        productoPanel.removeAll();
         
 		for (int i = 0; i < size; i++) {
 			hp_producto pro;

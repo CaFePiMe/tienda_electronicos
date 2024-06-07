@@ -45,6 +45,22 @@ public class admin_verProducto extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JButton btn_administrarPerfil = new JButton("Administrar Perfiles");
+		btn_administrarPerfil.setFont(new Font("Lufga", Font.PLAIN, 11));
+		btn_administrarPerfil.setBounds(12, 317, 131, 23);
+		btn_administrarPerfil.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	dispose(); 
+            	
+            	admins frame = new admins();
+        		frame.setVisible(true);
+            	
+                System.out.println("Carrito button clicked!");
+            }
+        });
+		contentPane.add(btn_administrarPerfil);
+		
 		textField = new JTextField();
 		textField.setColumns(10);
 		textField.setBounds(18, 35, 86, 23);
@@ -88,6 +104,8 @@ public class admin_verProducto extends JFrame {
 		btn_carrito.setBorderPainted(false);
 		btn_carrito.setContentAreaFilled(false);
 		contentPane.add(btn_carrito);
+		
+		
 		
 		ArrayList<Producto> productos = cp.getAllARegistros();
 		updateScroll(productos);

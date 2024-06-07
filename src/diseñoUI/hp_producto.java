@@ -11,11 +11,14 @@ import javax.swing.JTextField;
 import clasesBDs.Carro;
 import clasesBDs.Producto;
 import clasesBDs.Usuario;
+import clasesBDs.Valoracion;
 import controladores.CCarro;
+import controladores.CValoracion;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class hp_producto extends JPanel {
@@ -29,6 +32,7 @@ public class hp_producto extends JPanel {
 	private Usuario us;
 
 	CCarro cc = new CCarro();
+	CValoracion cv = new CValoracion();
 	/**
 	 * Create the panel.
 	 */
@@ -152,37 +156,39 @@ public class hp_producto extends JPanel {
 		add(star_3_1_1);
 		
 		// Crear las estrellas
-				estrellas = new JLabel[5];
-				for (int i = 0; i < estrellas.length; i++) {
-					estrellas[i] = new JLabel("");
-					estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
-					estrellas[i].setBounds(339 + (i * 25), 8, 26, 21);
-					final int index = i;
-					estrellas[i].addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							if (rating == index + 1) {
-								setRating(0);  // Desmarcar todas las estrellas
-							} else {
-								setRating(index + 1);  // Establecer la nueva calificación
-							}
-						}
-					});
-					add(estrellas[i]);
-				}
+		
+		estrellas = new JLabel[5];
+        for (int i = 0; i < 5; i++) {
+            estrellas[i] = new JLabel(); // Instantiate each JLabel here
+            estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
+            estrellas[i].setBounds(339 + (i * 25), 8, 26, 21);
+            add(estrellas[i]);
+        }
+		
+		ArrayList<Valoracion> valoraciones = cv.getRegistroList(pro.getCampoClavePrimaria(), Integer.toString(pro.getPrimaryKey()));
 
+		int total = 0;
+		if(valoraciones!= null &&!valoraciones.isEmpty()) {
+		    int size = valoraciones.size();
+		    for (int i = 0; i < size; i++) {
+		        total += valoraciones.get(i).getValoracion();
+		    }
+		    this.rating = Math.round((float)total/size); // Cast total to float to avoid integer division
+		    System.out.println(this.rating);
+		} else {
+		    rating = 1; // Default rating if no ratings exist
+		}
+		setRating(this.rating);
 	}
 	// Método para establecer la calificación
 	private void setRating(int rating) {
-			this.rating = rating;
-			for (int i = 0; i < estrellas.length; i++) {
-				if (i < rating) {
-					estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_star.png")));
-				} else {
-					estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
-				}
-			}
-	}
-	private void estrellas() {
+	    this.rating = rating;
+	    for (int i = 0; i < 5; i++) {
+	        if (i < rating) {
+	            estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_star.png")));
+	        } else {
+	            estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
+	        }
+	    }
 	}
 }
