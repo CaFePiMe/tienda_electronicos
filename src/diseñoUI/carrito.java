@@ -7,8 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clasesBDs.Carro;
 import clasesBDs.Producto;
 import clasesBDs.Usuario;
+import controladores.CCarro;
 import controladores.CProducto;
 
 import javax.swing.JLabel;
@@ -30,6 +32,7 @@ public class carrito extends JFrame {
 	private Usuario us;
 	
 	CProducto cp = new CProducto();
+	CCarro cc = new CCarro();
 
 	/**
 	 * Create the frame.
@@ -52,11 +55,6 @@ public class carrito extends JFrame {
 		lblNewLabel.setBounds(26, 4, 34, 67);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel1 = new JLabel("Total: Bs 0");
-		lblNewLabel1.setFont(new Font("Lufga Black", Font.PLAIN, 25));
-		lblNewLabel1.setBounds(32, 340, 147, 35);
-		contentPane.add(lblNewLabel1);
-		
 		JLabel img_carrito = new JLabel("");
 		img_carrito.setIcon(new ImageIcon(carrito.class.getResource("/recursos/front/front/front_elementos/usuario/carrito/Img/img_carrito.png")));
 		img_carrito.setBounds(31, 4, 34, 67);
@@ -78,26 +76,35 @@ public class carrito extends JFrame {
 		btn_compra.setContentAreaFilled(false);
 		contentPane.add(btn_compra);
 		
-		ArrayList<Producto> productos = cp.getAllARegistros();
-		updateScroll(productos);
+		ArrayList<Carro> carro = cc.getRegistroList("id_usu", Integer.toString(us.getPrimaryKey()));
+		updateScroll(carro);
+		
+	}
+	
+	public void updateScroll(ArrayList<Carro> carro) {
+		
+		int size = carro.size();
+		double total = 0;
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 89, 732, 232);
 		contentPane.add(scrollPane);
-	}
-	
-	public void updateScroll(ArrayList<Producto> productos) {
-		
-		int size = productos.size();
 		
 		JPanel productoPanel = new JPanel();
         productoPanel.setLayout(new BoxLayout(productoPanel, BoxLayout.Y_AXIS));
         productoPanel.setPreferredSize(new Dimension(565, size * 132));
         
 		for (int i = 0; i < size; i++) {
-			hp_producto pro;
-            productoPanel.add(pro = new c_producto(productos.get(i), us));
+			c_producto ca;
+			Producto pro = cp.getRegistro("id_pro", Integer.toString(carro.get(i).getIDpro()));
+            productoPanel.add(ca = new c_producto(pro, us, carro.get(i)));
+            
+            total =+ carro.get(i).getPrecio() * carro.get(i).getCantidad();
         }
+		
+		JLabel lblNewLabel1 = new JLabel("Total: Bs " + total);
+		lblNewLabel1.setFont(new Font("Lufga Black", Font.PLAIN, 25));
+		lblNewLabel1.setBounds(32, 340, 147, 35);
+		contentPane.add(lblNewLabel1);
 	}
-
 }

@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 
+import clasesBDs.Carro;
 import clasesBDs.Producto;
 import clasesBDs.Usuario;
 
@@ -18,12 +19,14 @@ public class c_producto extends JPanel {
 	private JTextField textField;
 	private Producto pro;
 	private Usuario us;
+	private Carro ca;
 
 	/**
 	 * Create the panel.
 	 */
-	public c_producto(Producto pro, Usuario us) {
+	public c_producto(Producto pro, Usuario us, Carro ca) {
 		
+		this.ca = ca;
 		this.pro = pro;
 		this.us = us;
 		
@@ -40,7 +43,7 @@ public class c_producto extends JPanel {
 		img_producto.setBounds(35, 9, 67, 67);
 		add(img_producto);
 		
-		textField = new JTextField();
+		textField = new JTextField(ca.getCantidad());
 		textField.setColumns(10);
 		textField.setBounds(10, 98, 26, 20);
 		add(textField);
@@ -67,11 +70,10 @@ public class c_producto extends JPanel {
 		
 		JTextArea txt_comentario = new JTextArea();
 		txt_comentario.setFont(new Font("Lufga", Font.PLAIN, 12));
-		txt_comentario.setText("\"El transistor 2N2222A es simplemente excepcional. Su versatilidad y confiabilidad lo\r\nconvierten en una opción de primera categoría para una amplia gama de aplicaciones,\r\ndesde simples proyectos de aficionados hasta proyectos industriales más complejos.\r\nSu bajo voltaje de saturación y alta ganancia de corriente lo hacen perfecto para\r\namplificación de señales y conmutación eficiente.\r\n¡Un componente indispensable en cualquier banco de trabajo electrónico!\"");
 		txt_comentario.setBounds(141, 38, 531, 111);
 		add(txt_comentario);
 		
-		JLabel h2_Usuario = new JLabel("USUARIO 809293004");
+		JLabel h2_Usuario = new JLabel(us.getNombre());
 		h2_Usuario.setFont(new Font("Lufga SemiBold", Font.PLAIN, 13));
 		h2_Usuario.setBounds(145, 18, 138, 14);
 		add(h2_Usuario);
