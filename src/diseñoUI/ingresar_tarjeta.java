@@ -7,8 +7,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clasesBDs.Carro;
+import clasesBDs.Producto;
 import clasesBDs.Usuario;
 import controladores.CCarro;
+import controladores.CProducto;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -32,6 +34,7 @@ public class ingresar_tarjeta extends JFrame {
 	private JTextField textField_4;
 	private Usuario us;
 	
+	CProducto cp = new CProducto();
 	CCarro cc = new CCarro();
 
 	/**
@@ -147,6 +150,8 @@ public class ingresar_tarjeta extends JFrame {
                 int size = carro.size();
         		
         		for (int i = 0; i < size; i++) {
+        			Producto pro = cp.getRegistro("id_pro", Integer.toString(carro.get(i).getIDpro()));
+        			cc.upDateRegistro(carro.get(i), "stock", Integer.toString((pro.getStock()-carro.get(i).getCantidad())));
         			cc.borrarRegistro(carro.get(i));
                 }
                 

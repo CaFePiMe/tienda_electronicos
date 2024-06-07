@@ -14,6 +14,8 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JScrollPane;
+
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class admin_editarProducto extends JFrame {
@@ -48,6 +50,20 @@ public class admin_editarProducto extends JFrame {
         contentPane.setLayout(null); // Usar layout nulo para posiciones absolutas
 
         setContentPane(contentPane);
+        
+        JButton btnHP = new JButton("home");
+		btnHP.setBounds(653, 11, 89, 23);
+		btnHP.addActionListener((ActionListener) new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	dispose();
+                System.out.println("Home button clicked!");
+                
+                admin_verProducto frame = new admin_verProducto();
+                frame.setVisible(true);
+            }
+        });
+		contentPane.add(btnHP);
         
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(0, 0, 752, 476);
