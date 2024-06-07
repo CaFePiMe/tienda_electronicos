@@ -31,21 +31,7 @@ public class admin_verProducto extends JFrame {
 	
 	CProducto cp = new CProducto();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					admin_verProducto frame = new admin_verProducto();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.

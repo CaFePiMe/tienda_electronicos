@@ -65,6 +65,17 @@ public class home_page extends JFrame {
 		JButton btn_administrarPerfil = new JButton("Administrar Perfil");
 		btn_administrarPerfil.setFont(new Font("Lufga", Font.PLAIN, 11));
 		btn_administrarPerfil.setBounds(12, 317, 131, 23);
+		btn_administrarPerfil.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	dispose(); 
+            	
+            	administrar_perfil frame = new administrar_perfil(us);
+        		frame.setVisible(true);
+            	
+                System.out.println("Carrito button clicked!");
+            }
+        });
 		contentPane.add(btn_administrarPerfil);
 		
 		JButton btn_categoría3 = new JButton("Categoría 3");
