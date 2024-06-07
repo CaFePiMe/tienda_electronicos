@@ -8,11 +8,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import clasesBDs.Carro;
 import clasesBDs.Producto;
+import clasesBDs.Usuario;
+import clasesBDs.Valoracion;
+import controladores.CCarro;
+import controladores.CValoracion;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class hp_producto extends JPanel {
@@ -22,14 +28,20 @@ public class hp_producto extends JPanel {
 	private int stock;
 	private JLabel[] estrellas;
 	private int rating = 0;
+	private Producto pro;
+	private Usuario us;
 
-
+	CCarro cc = new CCarro();
+	CValoracion cv = new CValoracion();
 	/**
 	 * Create the panel.
 	 */
-	public hp_producto(Producto pro) {
-		setLayout(null);
+	public hp_producto(Producto pro, Usuario us) {
 		
+		this.pro = pro;
+		this.us = us;
+		
+		setLayout(null);
 		stock = pro.getStock();
 		
 		JLabel lblNewLabel = new JLabel(pro.getNombre());
@@ -71,7 +83,23 @@ public class hp_producto extends JPanel {
 		btn_anadirCarrito.setBounds(399, 97, 77, 19);
 		btn_anadirCarrito.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Product added to cart.");
+            	
+            	String call = pro.getCampoClavePrimaria() + " = " + pro.getPrimaryKey() + " AND " + us.getCampoClavePrimaria();
+            	
+            	Carro carr = (Carro) cc.getRegistro(call, Integer.toString(us.getPrimaryKey()));
+            	
+            	System.out.println("btn_anadirCarrito");
+            	
+            	if(carr != null) {
+            		cc.upDateRegistro(carr, "cantidad", cantidad.getText());
+            		System.out.println("updated");
+            	} else {
+            		System.out.println("Product added to cart.");
+                    String nu = "'" + pro.getPrimaryKey() + "', '" + us.getPrimaryKey() + "', '" + cantidad.getText() + "', " + pro.getPrecio() + ", 1";
+                    
+                    cc.crearRegistro(nu);
+                    System.out.println("register");
+            	}
             }
         });
 		add(btn_anadirCarrito);
@@ -87,6 +115,7 @@ public class hp_producto extends JPanel {
 		add(txt_descripcion);
 		
 		cantidad = new JTextField();
+		cantidad.setText("0");
 		cantidad.setBounds(326, 94, 26, 20);
 		add(cantidad);
 		cantidad.setColumns(10);
@@ -127,40 +156,39 @@ public class hp_producto extends JPanel {
 		add(star_3_1_1);
 		
 		// Crear las estrellas
-				estrellas = new JLabel[5];
-				for (int i = 0; i < estrellas.length; i++) {
-					estrellas[i] = new JLabel("");
-					estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
-					estrellas[i].setBounds(339 + (i * 25), 8, 26, 21);
-					final int index = i;
-					estrellas[i].addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							if (rating == index + 1) {
-								setRating(0);  // Desmarcar todas las estrellas
-							} else {
-								setRating(index + 1);  // Establecer la nueva calificación
-							}
-						}
-					});
-					add(estrellas[i]);
-				}
+		
+		estrellas = new JLabel[5];
+        for (int i = 0; i < 5; i++) {
+            estrellas[i] = new JLabel(); // Instantiate each JLabel here
+            estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
+            estrellas[i].setBounds(339 + (i * 25), 8, 26, 21);
+            add(estrellas[i]);
+        }
+		
+		ArrayList<Valoracion> valoraciones = cv.getRegistroList(pro.getCampoClavePrimaria(), Integer.toString(pro.getPrimaryKey()));
 
+		int total = 0;
+		if(valoraciones!= null &&!valoraciones.isEmpty()) {
+		    int size = valoraciones.size();
+		    for (int i = 0; i < size; i++) {
+		        total += valoraciones.get(i).getValoracion();
+		    }
+		    this.rating = Math.round((float)total/size); // Cast total to float to avoid integer division
+		    System.out.println(this.rating);
+		} else {
+		    rating = 1; // Default rating if no ratings exist
+		}
+		setRating(this.rating);
 	}
 	// Método para establecer la calificación
-		private void setRating(int rating) {
-			this.rating = rating;
-			for (int i = 0; i < estrellas.length; i++) {
-				if (i < rating) {
-					estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_star.png")));
-				} else {
-					estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
-				}
-			}
-		}
-	private void estrellas() {
-		
-		
-		
+	private void setRating(int rating) {
+	    this.rating = rating;
+	    for (int i = 0; i < 5; i++) {
+	        if (i < rating) {
+	            estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_star.png")));
+	        } else {
+	            estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
+	        }
+	    }
 	}
 }

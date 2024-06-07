@@ -48,6 +48,7 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 	public int upDateRegistro(M mdl, String columna, String id) {
 		sql = "UPDATE " + mdl.getNombreTabla() + " SET " + columna + " = " + id + " WHERE "
 				+ mdl.getCampoClavePrimaria() + " = " + mdl.getPrimaryKey() + "";
+		System.out.println(sql);
 		int opcion = 0;
 		try {
 			opcion = ConexionBD.getStatement().executeUpdate(sql);
@@ -82,6 +83,7 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 			sql = "INSERT INTO " + this.nombreTabla + "(" + cn + ")"
 					+ "	VALUES ( " + (this.lastID()+1) + ", " + valores + ");";
 	        ps = conexion.prepareStatement(sql);
+	        System.out.println(sql);
 	        ps.executeQuery();
 			
 		} catch (SQLException e) {
@@ -114,9 +116,9 @@ public abstract class CCAbstract<M extends CBDAbstract> {
 		try {
 			
 			ArrayList<M> uss = new ArrayList<>();
-			sql = "SELECT * FROM " + this.nombreTabla + " WHERE " + columna + " =? AND activo = 1;";
+			sql = "SELECT * FROM " + this.nombreTabla + " WHERE " + columna + " = " + id + " AND activo = 1;";
 	        ps = conexion.prepareStatement(sql);
-	        ps.setString(1, id);
+	        System.out.println(sql);
 	        rs = ps.executeQuery();
 
         	while (rs.next()) {

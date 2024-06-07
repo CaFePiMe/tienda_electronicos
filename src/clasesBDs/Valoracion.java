@@ -2,6 +2,8 @@ package clasesBDs;
 
 public class Valoracion extends CBDAbstract {
 	
+	private int idusu;
+	private int idpro;
 	private int valoracion;
 	private String comentario;
 	
@@ -9,8 +11,10 @@ public class Valoracion extends CBDAbstract {
 		setBase();
 	}
 	
-	public Valoracion(int valoracion, String comentario) {
+	public Valoracion(int idusu, int idpro, int valoracion, String comentario) {
 		setBase();
+		this.idusu = idusu;
+		this.idpro = idpro;
 		this.valoracion = valoracion;
 		this.comentario = comentario;
 	}

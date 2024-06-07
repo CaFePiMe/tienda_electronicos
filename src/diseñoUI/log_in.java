@@ -27,22 +27,6 @@ public class log_in extends JFrame {
 	private JPasswordField txFContrasenia;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					log_in frame = new log_in();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public log_in() {
@@ -84,7 +68,7 @@ public class log_in extends JFrame {
                         		admin_verProducto frame = new admin_verProducto();
                         		frame.setVisible(true);
                         	}else {
-                        		home_page frame = new home_page();
+                        		home_page frame = new home_page(us);
                                 frame.setVisible(true);
                         	}
                         } catch (Exception ex) {

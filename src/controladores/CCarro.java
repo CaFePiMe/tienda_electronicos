@@ -17,35 +17,26 @@ public class CCarro extends CCAbstract {
 	public CCarro() {
 		this.nombreTabla = "carro";
 		this.campoClavePrimaria = "id_car";
+		
+		this.columnaLista.add("id_car");
+		this.columnaLista.add("id_pro");
+		this.columnaLista.add("id_usu");
+		this.columnaLista.add("cantidad");
+		this.columnaLista.add("precio");
+		this.columnaLista.add("activo");
 	}
 	
-	public void addCarro(Carro carro) throws SQLException {
-		
-	    sql = "INSERT INTO carro (id_car, id_com, id_pro, cantidad, precio, activo)"
-	    		+ "VALUES (?, ?, ?, ?, ?, ?);";
-	    try {
-	        ps = conexion.prepareCall(sql);
-	        ps.setInt(1, carro.getPrimaryKey());
-	        ps.setInt(2, carro.getIDcom());
-	        ps.setInt(3, carro.getIDpro());
-	        ps.setInt(4, carro.getCantidad());
-	        ps.setDouble(5, carro.getPrecio());
-	        ps.setInt(6, carro.getActivo());
-	        ps.executeUpdate();
-	    } catch (SQLException e) {
-	    	e.printStackTrace();
-	    }
-    }
+	
 	
 	@Override
 	public Carro llenar(ResultSet r) {
 		try {
 			int idcar = rs.getInt("id_car");
-			int idcom = rs.getInt("id_com");
-            int idpro = rs.getInt("id_pro");
+			int idpro = rs.getInt("id_pro");
+            int idusu = rs.getInt("id_usu");
             int cantidad = rs.getInt("cantidad");
             double precio = rs.getInt("precio");
-            Carro ca = new Carro(idcom, idpro, cantidad, precio);
+            Carro ca = new Carro(idpro, idusu, cantidad, precio);
             ca.setPrimaryKey(idcar);
         	
             return ca;

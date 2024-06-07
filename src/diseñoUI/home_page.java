@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clasesBDs.Producto;
+import clasesBDs.Usuario;
 import controladores.CProducto;
 
 import javax.swing.JLabel;
@@ -28,6 +29,8 @@ import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.GridBagLayout;
 import java.awt.CardLayout;
@@ -38,29 +41,18 @@ public class home_page extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField var_search;
-
+	private Usuario us;
+	
+	
 	CProducto cp = new CProducto();
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					home_page frame = new home_page();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public home_page() {
+	public home_page(Usuario us) {
+		
+		this.us = us;
+		
 		this.setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 769, 431);
@@ -73,6 +65,17 @@ public class home_page extends JFrame {
 		JButton btn_administrarPerfil = new JButton("Administrar Perfil");
 		btn_administrarPerfil.setFont(new Font("Lufga", Font.PLAIN, 11));
 		btn_administrarPerfil.setBounds(12, 317, 131, 23);
+		btn_administrarPerfil.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	dispose(); 
+            	
+            	administrar_perfil frame = new administrar_perfil(us);
+        		frame.setVisible(true);
+            	
+                System.out.println("Carrito button clicked!");
+            }
+        });
 		contentPane.add(btn_administrarPerfil);
 		
 		JButton btn_categoría3 = new JButton("Categoría 3");
@@ -83,9 +86,24 @@ public class home_page extends JFrame {
 		JButton btn_categoría2 = new JButton("Categoría 2");
 		btn_categoría2.setFont(new Font("Lufga", Font.PLAIN, 11));
 		btn_categoría2.setBounds(26, 183, 102, 23);
+		btn_categoría2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ArrayList<Producto> productos = cp.getRegistroList("id_cat", "2");
+				updateScroll(productos);
+				
+			}
+		});
 		contentPane.add(btn_categoría2);
 		
 		JButton btn_search = new JButton("");
+		btn_search.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ArrayList<Producto> productos = cp.getRegistroList("nombre", "'" + var_search.getText() + "'");
+				updateScroll(productos);
+			}
+		});
 		btn_search.setBounds(104, 35, 27, 23);
 		btn_search.setIcon(new ImageIcon(home_page.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_buscar.png")));
 		contentPane.add(btn_search);
@@ -96,6 +114,14 @@ public class home_page extends JFrame {
 		var_search.setColumns(10);
 		
 		JButton btn_categoría1 = new JButton("Categoría 1");
+		btn_categoría1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ArrayList<Producto> productos = cp.getRegistroList("id_cat", "1");
+				updateScroll(productos);
+				
+			}
+		});
 		btn_categoría1.setFont(new Font("Lufga", Font.PLAIN, 11));
 		btn_categoría1.setBounds(28, 124, 100, 23);
 		contentPane.add(btn_categoría1);
@@ -110,6 +136,18 @@ public class home_page extends JFrame {
 		btn_carrito.setIcon(new ImageIcon(home_page.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_carrito.png")));
 		btn_carrito.setBorderPainted(false);
 		btn_carrito.setContentAreaFilled(false);
+		btn_carrito.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	dispose(); 
+            	
+            	carrito frame = new carrito(us);
+        		frame.setVisible(true);
+            	
+                System.out.println("Carrito button clicked!");
+                // You can add more actions here
+            }
+        });
 		contentPane.add(btn_carrito);
 		
 		ArrayList<Producto> productos = cp.getAllARegistros();
@@ -129,9 +167,11 @@ public class home_page extends JFrame {
         productoPanel.setLayout(new BoxLayout(productoPanel, BoxLayout.Y_AXIS));
         productoPanel.setPreferredSize(new Dimension(565, size * 132));
         
+        productoPanel.removeAll();
+        
 		for (int i = 0; i < size; i++) {
 			hp_producto pro;
-            productoPanel.add(pro = new hp_producto(productos.get(i)));
+            productoPanel.add(pro = new hp_producto(productos.get(i), us));
         }
 		scrollPane.setViewportView(productoPanel);
 	}
