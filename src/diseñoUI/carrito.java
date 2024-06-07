@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clasesBDs.Producto;
+import clasesBDs.Usuario;
 import controladores.CProducto;
 
 import javax.swing.JLabel;
@@ -26,29 +27,17 @@ public class carrito extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private Usuario us;
 	
 	CProducto cp = new CProducto();
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					carrito frame = new carrito();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	public carrito() {
+	public carrito(Usuario us) {
+		
+		this.us = us;
+		
 		this.setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 768, 432);
@@ -107,7 +96,7 @@ public class carrito extends JFrame {
         
 		for (int i = 0; i < size; i++) {
 			hp_producto pro;
-            productoPanel.add(pro = new hp_producto(productos.get(i)));
+            productoPanel.add(pro = new c_producto(productos.get(i), us));
         }
 	}
 

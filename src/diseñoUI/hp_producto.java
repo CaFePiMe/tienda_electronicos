@@ -9,6 +9,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import clasesBDs.Producto;
+import clasesBDs.Usuario;
+import controladores.CCarro;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -22,14 +24,19 @@ public class hp_producto extends JPanel {
 	private int stock;
 	private JLabel[] estrellas;
 	private int rating = 0;
+	private Producto pro;
+	private Usuario us;
 
-
+	CCarro cc = new CCarro();
 	/**
 	 * Create the panel.
 	 */
-	public hp_producto(Producto pro) {
-		setLayout(null);
+	public hp_producto(Producto pro, Usuario us) {
 		
+		this.pro = pro;
+		this.us = us;
+		
+		setLayout(null);
 		stock = pro.getStock();
 		
 		JLabel lblNewLabel = new JLabel(pro.getNombre());
@@ -71,7 +78,12 @@ public class hp_producto extends JPanel {
 		btn_anadirCarrito.setBounds(399, 97, 77, 19);
 		btn_anadirCarrito.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	
                 System.out.println("Product added to cart.");
+                String nu = "'" + pro.getPrimaryKey() + "', '" + us.getPrimaryKey() + "', '" + cantidad.getText() + "', " + pro.getPrecio() + ", 1";
+                
+                cc.crearRegistro(nu);
+                
             }
         });
 		add(btn_anadirCarrito);
@@ -159,8 +171,5 @@ public class hp_producto extends JPanel {
 			}
 		}
 	private void estrellas() {
-		
-		
-		
 	}
 }

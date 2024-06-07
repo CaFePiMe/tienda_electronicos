@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clasesBDs.Producto;
+import clasesBDs.Usuario;
 import controladores.CProducto;
 
 import javax.swing.JLabel;
@@ -38,29 +39,18 @@ public class home_page extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField var_search;
-
+	private Usuario us;
+	
+	
 	CProducto cp = new CProducto();
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					home_page frame = new home_page();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public home_page() {
+	public home_page(Usuario us) {
+		
+		this.us = us;
+		
 		this.setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 769, 431);
@@ -131,7 +121,7 @@ public class home_page extends JFrame {
         
 		for (int i = 0; i < size; i++) {
 			hp_producto pro;
-            productoPanel.add(pro = new hp_producto(productos.get(i)));
+            productoPanel.add(pro = new hp_producto(productos.get(i), us));
         }
 		scrollPane.setViewportView(productoPanel);
 	}

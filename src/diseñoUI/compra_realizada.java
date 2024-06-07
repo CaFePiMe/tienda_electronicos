@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import clasesBDs.Usuario;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
@@ -16,27 +19,15 @@ public class compra_realizada extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					compra_realizada frame = new compra_realizada();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private Usuario us;
 
 	/**
 	 * Create the frame.
 	 */
-	public compra_realizada() {
+	public compra_realizada(Usuario us) {
+		
+		this.us = us;
+		
 		this.setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 769, 432);
@@ -78,7 +69,7 @@ public class compra_realizada extends JFrame {
 				// Cerrar la ventana actual
 				dispose();
 				// Abrir la ventana home_page
-				home_page home = new home_page();
+				home_page home = new home_page(us);
 				home.setVisible(true);
 			}
 		});

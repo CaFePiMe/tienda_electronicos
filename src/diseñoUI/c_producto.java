@@ -4,6 +4,10 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+
+import clasesBDs.Producto;
+import clasesBDs.Usuario;
+
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
@@ -12,20 +16,27 @@ public class c_producto extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
+	private Producto pro;
+	private Usuario us;
 
 	/**
 	 * Create the panel.
 	 */
-	public c_producto() {
+	public c_producto(Producto pro, Usuario us) {
+		
+		this.pro = pro;
+		this.us = us;
+		
 		setLayout(null);
 		
-		JLabel h2_nombreProducto = new JLabel("BJT NPN");
+		JLabel h2_nombreProducto = new JLabel(pro.getNombre());
 		h2_nombreProducto.setFont(new Font("Lufga SemiBold", Font.PLAIN, 14));
 		h2_nombreProducto.setBounds(34, 78, 56, 14);
 		add(h2_nombreProducto);
 		
 		JLabel img_producto = new JLabel("");
-		img_producto.setIcon(new ImageIcon(c_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/resistores.png")));
+		String resourcePath = "/recursos_productos/" + pro.getImagen();
+		img_producto.setIcon(new ImageIcon(hp_producto.class.getResource(resourcePath)));
 		img_producto.setBounds(35, 9, 67, 67);
 		add(img_producto);
 		
@@ -49,7 +60,7 @@ public class c_producto extends JPanel {
 		btn_dejarComentario.setContentAreaFilled(false);
 		add(btn_dejarComentario);
 		
-		JLabel h3_costo = new JLabel("Total Bs.500");
+		JLabel h3_costo = new JLabel("Total Bs." + (pro.getPrecio() * Double.parseDouble(textField.getText())));
 		h3_costo.setFont(new Font("Lufga", Font.PLAIN, 11));
 		h3_costo.setBounds(29, 123, 67, 14);
 		add(h3_costo);

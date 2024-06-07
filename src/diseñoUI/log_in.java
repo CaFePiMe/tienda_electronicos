@@ -84,7 +84,7 @@ public class log_in extends JFrame {
                         		admin_verProducto frame = new admin_verProducto();
                         		frame.setVisible(true);
                         	}else {
-                        		home_page frame = new home_page();
+                        		home_page frame = new home_page(us);
                                 frame.setVisible(true);
                         	}
                         } catch (Exception ex) {

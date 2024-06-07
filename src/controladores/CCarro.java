@@ -17,25 +17,15 @@ public class CCarro extends CCAbstract {
 	public CCarro() {
 		this.nombreTabla = "carro";
 		this.campoClavePrimaria = "id_car";
+		
+		this.columnaLista.add("id_car");
+		this.columnaLista.add("id_pro");
+		this.columnaLista.add("id_usu");
+		this.columnaLista.add("cantidad");
+		this.columnaLista.add("precio");
 	}
 	
-	public void addCarro(Carro carro) throws SQLException {
-		
-	    sql = "INSERT INTO carro (id_car, id_com, id_pro, cantidad, precio, activo)"
-	    		+ "VALUES (?, ?, ?, ?, ?, ?);";
-	    try {
-	        ps = conexion.prepareCall(sql);
-	        ps.setInt(1, carro.getPrimaryKey());
-	        ps.setInt(2, carro.getIDcom());
-	        ps.setInt(3, carro.getIDpro());
-	        ps.setInt(4, carro.getCantidad());
-	        ps.setDouble(5, carro.getPrecio());
-	        ps.setInt(6, carro.getActivo());
-	        ps.executeUpdate();
-	    } catch (SQLException e) {
-	    	e.printStackTrace();
-	    }
-    }
+	
 	
 	@Override
 	public Carro llenar(ResultSet r) {
