@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import clasesBDs.Carro;
 import clasesBDs.Producto;
 import clasesBDs.Usuario;
+import controladores.CCarro;
 
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -34,7 +35,7 @@ public class c_producto extends JPanel {
 		
 		JLabel h2_nombreProducto = new JLabel(pro.getNombre());
 		h2_nombreProducto.setFont(new Font("Lufga SemiBold", Font.PLAIN, 14));
-		h2_nombreProducto.setBounds(34, 78, 56, 14);
+		h2_nombreProducto.setBounds(10, 78, 117, 14);
 		add(h2_nombreProducto);
 		
 		JLabel img_producto = new JLabel("");
@@ -43,17 +44,32 @@ public class c_producto extends JPanel {
 		img_producto.setBounds(35, 9, 67, 67);
 		add(img_producto);
 		
-		textField = new JTextField(ca.getCantidad());
+		textField = new JTextField();
+		textField.setText(Integer.toString(ca.getCantidad()));
 		textField.setColumns(10);
 		textField.setBounds(10, 98, 26, 20);
 		add(textField);
 		
 		JButton btn_sumar = new JButton("+");
 		btn_sumar.setBounds(41, 96, 42, 23);
+		btn_sumar.addActionListener(e -> {
+            int currentQuantity = Integer.parseInt(textField.getText());
+            int newQuantity = currentQuantity + 1; 
+            textField.setText(Integer.toString(newQuantity)); 
+            updateCantidad(Integer.parseInt(textField.getText()));
+        });
 		add(btn_sumar);
 		
 		JButton btn_menos = new JButton("-");
 		btn_menos.setBounds(85, 96, 42, 23);
+		btn_menos.addActionListener(e -> {
+            int currentQuantity = Integer.parseInt(textField.getText());
+            if (currentQuantity > 0) { 
+                int newQuantity = currentQuantity - 1; 
+                textField.setText(Integer.toString(newQuantity)); 
+            }
+            updateCantidad(Integer.parseInt(textField.getText()));
+        });
 		add(btn_menos);
 		
 		JButton btn_dejarComentario = new JButton("");
@@ -65,7 +81,7 @@ public class c_producto extends JPanel {
 		
 		JLabel h3_costo = new JLabel("Total Bs." + (pro.getPrecio() * Double.parseDouble(textField.getText())));
 		h3_costo.setFont(new Font("Lufga", Font.PLAIN, 11));
-		h3_costo.setBounds(29, 123, 67, 14);
+		h3_costo.setBounds(10, 123, 117, 14);
 		add(h3_costo);
 		
 		JTextArea txt_comentario = new JTextArea();
@@ -102,6 +118,13 @@ public class c_producto extends JPanel {
 		star_3_1_1.setIcon(new ImageIcon(c_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
 		star_3_1_1.setBounds(392, 11, 26, 21);
 		add(star_3_1_1);
-
+	}
+	
+	private void updateCantidad(int cantidad) {
+		
+		CCarro cc = new CCarro();
+		
+		cc.upDateRegistro(ca, "cantidad", Integer.toString(cantidad));
+		System.out.println("updated");
 	}
 }

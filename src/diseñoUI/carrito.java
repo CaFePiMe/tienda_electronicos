@@ -18,6 +18,8 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -30,6 +32,8 @@ public class carrito extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Usuario us;
+	
+	JLabel lblNewLabel1;
 	
 	CProducto cp = new CProducto();
 	CCarro cc = new CCarro();
@@ -46,6 +50,20 @@ public class carrito extends JFrame {
 		setBounds(100, 100, 768, 432);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		JButton btnHP = new JButton("home");
+		btnHP.setBounds(653, 11, 89, 23);
+		btnHP.addActionListener((ActionListener) new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	dispose();
+                System.out.println("Home button clicked!");
+                
+                home_page frame = new home_page(us);
+                frame.setVisible(true);
+            }
+        });
+		contentPane.add(btnHP);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -74,6 +92,16 @@ public class carrito extends JFrame {
 		btn_compra.setBounds(606, 334, 118, 45);
 		btn_compra.setBorderPainted(false);		
 		btn_compra.setContentAreaFilled(false);
+		btn_compra.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	        	dispose();
+	            System.out.println("Compra button clicked!");
+	            
+	            ingresar_tarjeta frame = new ingresar_tarjeta(us);
+                frame.setVisible(true);
+	        }
+	    });
 		contentPane.add(btn_compra);
 		
 		ArrayList<Carro> carro = cc.getRegistroList("id_usu", Integer.toString(us.getPrimaryKey()));
@@ -92,19 +120,33 @@ public class carrito extends JFrame {
 		
 		JPanel productoPanel = new JPanel();
         productoPanel.setLayout(new BoxLayout(productoPanel, BoxLayout.Y_AXIS));
-        productoPanel.setPreferredSize(new Dimension(565, size * 132));
+        productoPanel.setPreferredSize(new Dimension(565, size * 160));
         
 		for (int i = 0; i < size; i++) {
 			c_producto ca;
 			Producto pro = cp.getRegistro("id_pro", Integer.toString(carro.get(i).getIDpro()));
             productoPanel.add(ca = new c_producto(pro, us, carro.get(i)));
             
-            total =+ carro.get(i).getPrecio() * carro.get(i).getCantidad();
+            total += carro.get(i).getPrecio() * carro.get(i).getCantidad();
         }
 		
-		JLabel lblNewLabel1 = new JLabel("Total: Bs " + total);
+		lblNewLabel1 = new JLabel("Total: Bs " + total);
 		lblNewLabel1.setFont(new Font("Lufga Black", Font.PLAIN, 25));
-		lblNewLabel1.setBounds(32, 340, 147, 35);
+		lblNewLabel1.setBounds(32, 340, 520, 35);
 		contentPane.add(lblNewLabel1);
+		
+		scrollPane.setViewportView(productoPanel);
+		
+		
+	}
+	public void updateTotal(ArrayList<Carro> carro) {
+		
+		int size = carro.size();
+		double total = 0;
+		
+		for (int i = 0; i < size; i++) {
+            total += carro.get(i).getPrecio() * carro.get(i).getCantidad();
+        }
+		lblNewLabel1.setText("Total: Bs " + total);
 	}
 }

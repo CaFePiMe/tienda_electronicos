@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import clasesBDs.Carro;
 import clasesBDs.Producto;
 import clasesBDs.Usuario;
 import controladores.CCarro;
@@ -79,11 +80,22 @@ public class hp_producto extends JPanel {
 		btn_anadirCarrito.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	
-                System.out.println("Product added to cart.");
-                String nu = "'" + pro.getPrimaryKey() + "', '" + us.getPrimaryKey() + "', '" + cantidad.getText() + "', " + pro.getPrecio() + ", 1";
-                
-                cc.crearRegistro(nu);
-                
+            	String call = pro.getCampoClavePrimaria() + " = " + pro.getPrimaryKey() + " AND " + us.getCampoClavePrimaria();
+            	
+            	Carro carr = (Carro) cc.getRegistro(call, Integer.toString(us.getPrimaryKey()));
+            	
+            	System.out.println("btn_anadirCarrito");
+            	
+            	if(carr != null) {
+            		cc.upDateRegistro(carr, "cantidad", cantidad.getText());
+            		System.out.println("updated");
+            	} else {
+            		System.out.println("Product added to cart.");
+                    String nu = "'" + pro.getPrimaryKey() + "', '" + us.getPrimaryKey() + "', '" + cantidad.getText() + "', " + pro.getPrecio() + ", 1";
+                    
+                    cc.crearRegistro(nu);
+                    System.out.println("register");
+            	}
             }
         });
 		add(btn_anadirCarrito);
@@ -99,6 +111,7 @@ public class hp_producto extends JPanel {
 		add(txt_descripcion);
 		
 		cantidad = new JTextField();
+		cantidad.setText("0");
 		cantidad.setBounds(326, 94, 26, 20);
 		add(cantidad);
 		cantidad.setColumns(10);
@@ -160,7 +173,7 @@ public class hp_producto extends JPanel {
 
 	}
 	// Método para establecer la calificación
-		private void setRating(int rating) {
+	private void setRating(int rating) {
 			this.rating = rating;
 			for (int i = 0; i < estrellas.length; i++) {
 				if (i < rating) {
@@ -169,7 +182,7 @@ public class hp_producto extends JPanel {
 					estrellas[i].setIcon(new ImageIcon(hp_producto.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_starv.png")));
 				}
 			}
-		}
+	}
 	private void estrellas() {
 	}
 }

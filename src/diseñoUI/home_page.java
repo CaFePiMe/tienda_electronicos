@@ -29,6 +29,8 @@ import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.GridBagLayout;
 import java.awt.CardLayout;
@@ -100,6 +102,18 @@ public class home_page extends JFrame {
 		btn_carrito.setIcon(new ImageIcon(home_page.class.getResource("/recursos/front/front/front_elementos/usuario/menu/btn/btn_carrito.png")));
 		btn_carrito.setBorderPainted(false);
 		btn_carrito.setContentAreaFilled(false);
+		btn_carrito.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	dispose(); 
+            	
+            	carrito frame = new carrito(us);
+        		frame.setVisible(true);
+            	
+                System.out.println("Carrito button clicked!");
+                // You can add more actions here
+            }
+        });
 		contentPane.add(btn_carrito);
 		
 		ArrayList<Producto> productos = cp.getAllARegistros();

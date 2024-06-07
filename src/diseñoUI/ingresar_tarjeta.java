@@ -5,10 +5,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import clasesBDs.Carro;
+import clasesBDs.Usuario;
+import controladores.CCarro;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -21,27 +30,17 @@ public class ingresar_tarjeta extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ingresar_tarjeta frame = new ingresar_tarjeta();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private Usuario us;
+	
+	CCarro cc = new CCarro();
 
 	/**
 	 * Create the frame.
 	 */
-	public ingresar_tarjeta() {
+	public ingresar_tarjeta(Usuario us) {
+		
+		this.us = us;
+		
 		this.setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 767, 433);
@@ -49,6 +48,21 @@ public class ingresar_tarjeta extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JButton btnHP = new JButton("home");
+		btnHP.setBounds(653, 11, 89, 23);
+		btnHP.addActionListener((ActionListener) new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	dispose();
+                System.out.println("Home button clicked!");
+                
+                home_page frame = new home_page(us);
+                frame.setVisible(true);
+                
+            }
+        });
+		contentPane.add(btnHP);
 		
 		JLabel h1 = new JLabel("Ingrese los datos de su tarjeta");
 		h1.setFont(new Font("Lufga Black", Font.PLAIN, 19));
@@ -111,16 +125,47 @@ public class ingresar_tarjeta extends JFrame {
 		textField_4.setBounds(34, 182, 104, 20);
 		contentPane.add(textField_4);
 		
-		JLabel int_total = new JLabel("Total Bs.0");
-		int_total.setFont(new Font("Lufga Black", Font.PLAIN, 19));
-		int_total.setBounds(34, 276, 104, 26);
-		contentPane.add(int_total);
+		ArrayList<Carro> carro = cc.getRegistroList("id_usu", Integer.toString(us.getPrimaryKey()));
+		updateTotal(carro);
 		
 		JButton btn_subir = new JButton("");
 		btn_subir.setIcon(new ImageIcon(ingresar_tarjeta.class.getResource("/recursos/front/front/front_elementos/usuario/ingresar_tarjeta/btn/btn_subir.png")));
 		btn_subir.setBounds(31, 324, 89, 23);
 		btn_subir.setBorderPainted(false);
 		btn_subir.setContentAreaFilled(false);
+		btn_subir.addActionListener((ActionListener) new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	dispose();
+                System.out.println("Home button clicked!");
+                
+                home_page frame = new home_page(us);
+                frame.setVisible(true);
+                
+                ArrayList<Carro> carro = cc.getRegistroList("id_usu", Integer.toString(us.getPrimaryKey()));
+                
+                int size = carro.size();
+        		
+        		for (int i = 0; i < size; i++) {
+        			cc.borrarRegistro(carro.get(i));
+                }
+                
+            }
+        });
 		contentPane.add(btn_subir);
+	}
+	
+	public void updateTotal(ArrayList<Carro> carro) {
+		
+		int size = carro.size();
+		double total = 0;
+		
+		for (int i = 0; i < size; i++) {
+            total += carro.get(i).getPrecio() * carro.get(i).getCantidad();
+        }
+		JLabel int_total = new JLabel("Total Bs." + total);
+		int_total.setFont(new Font("Lufga Black", Font.PLAIN, 19));
+		int_total.setBounds(34, 276, 394, 26);
+		contentPane.add(int_total);
 	}
 }

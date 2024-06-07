@@ -2,8 +2,8 @@ package clasesBDs;
 
 public class Carro extends CBDAbstract {
 	
-	private int idcom;
 	private int idpro;
+	private int idusu;
 	private int cantidad;
 	private double precio;
 	
@@ -11,10 +11,10 @@ public class Carro extends CBDAbstract {
 		setBase();
 	}
 	
-	public Carro (int idcom, int idpro, int cantidad, double precio) {
+	public Carro (int idpro, int idusu, int cantidad, double precio) {
 		setBase();
-		this.idcom = idcom;
 		this.idpro = idpro;
+		this.idusu = idusu;
 		this.cantidad = cantidad;
 		this.precio = precio;
 	}
@@ -25,12 +25,12 @@ public class Carro extends CBDAbstract {
 		this.setActivo(1);
 	}
 	
-	public int getIDcom() {
-		return idcom;
+	public int getIDusu() {
+		return idusu;
 	}
 	
-	public void setIDcom(int idcom) {
-		this.idcom = idcom;
+	public void setIDusu(int idusu) {
+		this.idusu = idusu;
 	}
 	
 	public int getIDpro() {

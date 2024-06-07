@@ -23,6 +23,7 @@ public class CCarro extends CCAbstract {
 		this.columnaLista.add("id_usu");
 		this.columnaLista.add("cantidad");
 		this.columnaLista.add("precio");
+		this.columnaLista.add("activo");
 	}
 	
 	
@@ -31,11 +32,11 @@ public class CCarro extends CCAbstract {
 	public Carro llenar(ResultSet r) {
 		try {
 			int idcar = rs.getInt("id_car");
-			int idcom = rs.getInt("id_com");
-            int idpro = rs.getInt("id_pro");
+			int idpro = rs.getInt("id_pro");
+            int idusu = rs.getInt("id_usu");
             int cantidad = rs.getInt("cantidad");
             double precio = rs.getInt("precio");
-            Carro ca = new Carro(idcom, idpro, cantidad, precio);
+            Carro ca = new Carro(idpro, idusu, cantidad, precio);
             ca.setPrimaryKey(idcar);
         	
             return ca;
